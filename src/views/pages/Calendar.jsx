@@ -242,7 +242,7 @@ class CalendarView extends React.Component {
 			<>
 				{this.state.alert}
 				<div className="header header-dark bg-white pb-6 content__title content__title--calendar">
-					<h1> yolo </h1>
+					
 					<Container fluid>
 						<div className="header-body">
 							<Row className="align-items-center py-4">
