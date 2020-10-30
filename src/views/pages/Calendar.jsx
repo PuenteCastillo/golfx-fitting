@@ -71,10 +71,10 @@ class CalendarView extends React.Component {
 
 	convertToEvent = (data) => {
 		let event = [];
-		console.log("events", event);
+		// console.log("events", event);
 
 		for (let i = 0; i < data.length; i++) {
-			console.log("data", data[i].customer.name_first);
+			// console.log("data", data[i].customer.name_first);
 			let item = {
 				id: data[i].id,
 				title: data[i].customer.name_first + " " + data[i].customer.name_last,
