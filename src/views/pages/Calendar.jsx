@@ -55,12 +55,13 @@ class CalendarView extends React.Component {
 	};
 	componentDidMount() {
 		let myState = this;
-
+		// console.log('state.events', this.state.events)
 		axios
 			.get("https://kbsgolfx-db.herokuapp.com/fittings?_limit=-1")
 			.then(function (response) {
+				// console.log('response', response)
 				myState.setState({ fittings: response.data });
-				console.log("fittings", myState.state.fittings);
+				// console.log("fittings", myState.state.fittings); 
 
 				myState.convertToEvent(myState.state.fittings);
 			})
@@ -71,10 +72,11 @@ class CalendarView extends React.Component {
 
 	convertToEvent = (data) => {
 		let event = [];
-		// console.log("events", event);
+		// console.log("esdafsd", data);
 
 		for (let i = 0; i < data.length; i++) {
 			// console.log("data", data[i].customer.name_first);
+
 			let item = {
 				id: data[i].id,
 				title: data[i].customer.name_first + " " + data[i].customer.name_last,
@@ -83,16 +85,20 @@ class CalendarView extends React.Component {
 				className: "bg-" + data[i].status_color,
 				description: data[i].customer.fitting_notes,
 			};
+			// console.log('item', item)
+			console.log(item.start)
 			event.push(item);
 		}
-		console.log("events", event);
+		// console.log("events", event);
 
 		this.setState({ events: event });
-
+		// console.log('state after items pushed', this.state.events)
+		// setTimeout(this.createCalendar(), 1000);
 		this.createCalendar();
 	};
 
 	createCalendar = () => {
+		// console.log('is this being called correctly?', this.state.events);
 		calendar = new Calendar(this.refs.calendar, {
 			plugins: [interaction, dayGridPlugin],
 			defaultView: "dayGridMonth",
@@ -102,7 +108,7 @@ class CalendarView extends React.Component {
 			events: this.state.events,
 
 			eventClick: ({ event }) => {
-				console.log(event._def.extendedProps.description);
+				// console.log(event._def.extendedProps.description);
 				this.setState({
 					modalChange: true,
 					eventId: event.id,
@@ -114,6 +120,7 @@ class CalendarView extends React.Component {
 			},
 		});
 		calendar.render();
+		// console.log('state in create calendar', calendar.render())
 		this.setState({
 			currentDate: calendar.view.title,
 		});
@@ -126,7 +133,7 @@ class CalendarView extends React.Component {
 	};
 	addNewEvent = () => {
 		var newEvents = this.state.events;
-		console.log(newEvents);
+		// console.log('what is this',newEvents);
 		newEvents.push({
 			title: this.state.eventTitle,
 			start: this.state.startDate,
