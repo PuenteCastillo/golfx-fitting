@@ -219,7 +219,7 @@ class Fittings extends React.Component {
 					if(customerList[i].fittings[k].status == "Complete"){
 						// console.log('completed build', customerList[i].fittings[k].status);
 						customerList[i].last_fitted = customerList[i].fittings[k].fitting_date;
-						var formattedDate = moment(customerList[i].fittings[k].fitting_date).format("dddd, MMMM Do, h:mm a");
+						var formattedDate = moment(customerList[i].fittings[k].fitting_date).format("MM-DD-YYYY");
 						customerList[i].last_fitted = formattedDate
 					}
 					//  var formattedDate = moment(customerList[i].fittings[k].fitting_date).format("dddd, MMMM Do, h:mm a");
@@ -241,7 +241,7 @@ class Fittings extends React.Component {
 					console.log('dates', dates)
 					customerList[i].last_fitted = dates[0];
 					if(dates[0]){
-						var formattedDate = moment(customerList[i].fittings[k].fitting_date).format("dddd, MMMM Do, h:mm a");
+						var formattedDate = moment(customerList[i].fittings[k].fitting_date).format("MM-DD-YYYY");
 						customerList[i].last_fitted = formattedDate
 					}
 						// var formattedDate = moment(customerList[i].fittings[k].fitting_date).format("dddd, MMMM Do, h:mm a");

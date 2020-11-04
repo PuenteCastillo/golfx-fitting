@@ -90,7 +90,7 @@ class Fitting_notes extends React.Component {
       } else {
         return (
           <AppCard
-            title="Fitting Notes"
+            title="Customer Notes"
             btnText="Add Fitting Notes"
             icon="fad fa-sticky-note display-2"
             style="icon icon-shape bg-gradient-red text-dark rounded-circle shadow"
