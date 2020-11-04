@@ -148,7 +148,9 @@ class SpecModel extends React.Component {
 											data={[
 												{ id: "Hook", text: "Hook" },
 												{ id: "Straight", text: "Straight" },
-												{ id: "Slice", text: "Slice" }
+												{ id: "Slice", text: "Slice" },
+												{ id: "Push", text: "Push"},
+												{id: "Pull", text: "Pull"}
 											]}
 											value={this.state.normal_shot_shape}
 											onChange={(e) => {
@@ -173,6 +175,7 @@ class SpecModel extends React.Component {
 												{ id: "High", text: "High" },
 												{ id: "Mid", text: "Mid" },
 												{ id: "Low", text: "Low" }
+								
 											]}
 											// value={value}
 											value={this.state.normal_trajectory}

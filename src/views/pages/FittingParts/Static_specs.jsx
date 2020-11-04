@@ -53,6 +53,7 @@ class Fitting extends React.Component {
 	};
 
 	render() {
+		console.log('is this working?', this.state.specToggle);
 		return (
 			<>
 				<SpecModel

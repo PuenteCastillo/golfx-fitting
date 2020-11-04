@@ -439,7 +439,9 @@ class Fitting extends React.Component {
 															id: "Ready For Build",
 															text: "Ready For Build",
 														},
-														{ id: "Complete", text: "Complete" },
+														{ id: "On Order", text: "On Order" },
+														{ id: "Drying Rack", text: "Drying Rack" },
+														{ id: "Complete", text: "Complete" }
 													]}
 													value={this.state.status}
 													onChange={(e) =>
