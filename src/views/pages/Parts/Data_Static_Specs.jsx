@@ -52,7 +52,7 @@ class Data_Static_Specs extends React.Component {
 
 
   render() {
-    console.log('data static specs ', this.state.static_specs)
+    // console.log('data static specs ', this.state.static_specs)
     return (
       <>
         <Col md="6" xl="6">
