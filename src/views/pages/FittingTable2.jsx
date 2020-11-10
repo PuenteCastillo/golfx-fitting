@@ -37,7 +37,8 @@ class FittingTable2 extends React.Component {
 
 	componentDidMount = () => {
 		let myState = this;
-
+		// console.log('asdfasdf');
+		console.log("props in fitting table", this.props)
 		if (this.props.startingData) {
 			for (let i = 0; i < this.props.startingData.length; i++) {
 				this.props.startingData[i].marked = "Delete";

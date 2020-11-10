@@ -208,7 +208,7 @@ class Fittings extends React.Component {
 		// var d = new Date();
 		// console.log('date', d)
 		let customerList = this.state.customerList;
-		// console.log("customer list ", customerList)
+		
 		for (var i = 0; i < this.state.customerList.length; i++) {
 			if(customerList[i].fittings){
 			// var unsortedFittings = customerList[i].fittings;
@@ -216,12 +216,12 @@ class Fittings extends React.Component {
 			for (var k = 0; k < customerList[i].fittings.length; k++){
 				if (customerList[i].fittings.length == 1){
 					// customerList[i].last_fitted = customerList[i].fittings[k].fitting_date;
-					if(customerList[i].fittings[k].status == "Complete"){
+					// if(customerList[i].fittings[k].status == "Complete"){
 						// console.log('completed build', customerList[i].fittings[k].status);
 						customerList[i].last_fitted = customerList[i].fittings[k].fitting_date;
-						var formattedDate = moment(customerList[i].fittings[k].fitting_date).format("MM-DD-YYYY");
+						var formattedDate = moment(customerList[i].fittings[k].fitting_date).format("YYYY-MM-DD");
 						customerList[i].last_fitted = formattedDate
-					}
+					// }
 					//  var formattedDate = moment(customerList[i].fittings[k].fitting_date).format("dddd, MMMM Do, h:mm a");
 					//  customerList[i].last_fitted = formattedDate
 					// console.log('last fitted', customerList[i].last_fitted)
@@ -229,21 +229,18 @@ class Fittings extends React.Component {
 					// console.log('length of builds', customerList[i].fittings[k]);
 
 
-					var dates = [];
-					// dates.push(customerList[i].fittings[k].fitting_date)
-					if (customerList[i].fittings[k].status == "Complete"){
-						dates.push(customerList[i].fittings[k].fitting_date)
-						// if (dates.length > 1){
-						// 	console.log('more than 1 fitting', dates)
-						// }
-						// console.log('dates', dates.length)
-					}
-					console.log('dates', dates)
-					customerList[i].last_fitted = dates[0];
-					if(dates[0]){
-						var formattedDate = moment(customerList[i].fittings[k].fitting_date).format("MM-DD-YYYY");
-						customerList[i].last_fitted = formattedDate
-					}
+					var dates = customerList[i].fittings;
+
+					// customerList[i].last_fitted = dates[0];
+					
+						// var formattedDate = moment(customerList[i].fittings[k].fitting_date).format("MM-DD-YYYY");
+						// customerList[i].last_fitted = formattedDate
+					
+					var orderedDates = dates.sort(function(a,b){
+						return Date.parse(a) < Date.parse(b);
+					});
+					customerList[i].last_fitted = moment(orderedDates[0]).format("YYYY-MM-DD");
+					console.log('ordered dates', orderedDates);
 						// var formattedDate = moment(customerList[i].fittings[k].fitting_date).format("dddd, MMMM Do, h:mm a");
 						// customerList[i].last_fitted = formattedDate
 					// for (var l = 0; l<customerList[i].fittings[k].length; l++){
