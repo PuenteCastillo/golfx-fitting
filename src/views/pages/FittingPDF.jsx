@@ -436,7 +436,7 @@ class FittingPDF extends React.Component {
 		if (!this.isEmpty(this.props.seven_iron_specs)) {
 			return (
 				<View>
-					<Text style={styles.specheader}> Customer 7 Iron Specs:</Text>
+					<Text style={styles.specheader}> Current Specs:</Text>
 					<Text style={styles.label}> Length : {this.props.seven_iron_specs.length || "N/A"} </Text>
 					<Text style={styles.label}> Lie : {this.props.seven_iron_specs.lie || "N/A"} </Text>
 					<Text style={styles.label}> Loft : {this.props.seven_iron_specs.loft || "N/A"} </Text>
@@ -467,7 +467,7 @@ class FittingPDF extends React.Component {
 							<Text style={styles.label}> {this.props.building_notes || "N/A"} </Text>
 						</View>
 						<View style={styles.sectionData}>
-							<Text style={styles.specheader}> Fitting Notes:</Text>
+							<Text style={styles.specheader}> Customer Notes:</Text>
 							<Text style={styles.label}> {this.props.fitting_notes || "N/A"} </Text>
 						</View>
 					</View>

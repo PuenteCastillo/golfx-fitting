@@ -61,6 +61,7 @@ const clubSelect = [
 	{ value: "8", label: "8" },
 	{ value: "9", label: "9" },
 	{ value: "PW", label: "PW" },
+	{ value: "GW", label: "GW" }
 ];
 const HybridSelect = [
 	{ value: "2", label: "2" },
@@ -298,15 +299,40 @@ class Fitting extends React.Component {
 		let color = "success";
 		if (mystate.state.status === "Complete") {
 			color = "default";
-		}
-		if (mystate.state.status === "Complete") {
-			color = "default";
 		} else if (mystate.state.status === "Ready For Build") {
 			color = "warning";
+		} else if (mystate.state.status === "On Order") {
+			color = "info";
+		}
+		else if (mystate.state.status === "Ready For Build") {
+			color = "info";
+		}else if (mystate.state.status === "Ready For Fitting") {
+			color = "info";
 		} else {
 			color = "success";
 		}
+		// switch(mystate.state.status){
+		// 	case "Complete":
+		// 		color = "default";
+		// 		break;
+		// 	case "Ready For Build":
+		// 		color = "warning";
+		// 		break;
+		// 	case "On Order":
+		// 		color = "info";
+		// 		break;
+		// 	case "Drying Rack":
+		// 		color = "dark";
+		// 		break;
+		// 	case "Complete":
+		// 		color = "success";
+		// 		break;
+		// 	default:
+		// 		color = "secondary";
+		// 		break;
 
+
+		// }
 		let data = {};
 
 		if (!this.isEmpty(mystate.state.seven_iron_specs)) {
@@ -435,11 +461,11 @@ class Fitting extends React.Component {
 															id: "Ready For Fitting",
 															text: "Ready For Fitting",
 														},
+														{ id: "On Order", text: "On Order" },
 														{
 															id: "Ready For Build",
 															text: "Ready For Build",
 														},
-														{ id: "On Order", text: "On Order" },
 														{ id: "Drying Rack", text: "Drying Rack" },
 														{ id: "Complete", text: "Complete" }
 													]}

@@ -52,7 +52,7 @@ class Fitting_notes extends React.Component {
         <Card className="card-pricing border-0 text-center mb-4">
           <CardHeader className="bg-transparent">
             <h4 className="text-uppercase ls-1  py-3 mb-0">
-              Fitting Notes
+              Customer Notes
   </h4>
           </CardHeader>
           <CardBody >
