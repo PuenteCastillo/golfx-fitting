@@ -302,37 +302,16 @@ class Fitting extends React.Component {
 		} else if (mystate.state.status === "Ready For Build") {
 			color = "warning";
 		} else if (mystate.state.status === "On Order") {
-			color = "info";
+			color = "secoundary";
 		}
-		else if (mystate.state.status === "Ready For Build") {
-			color = "info";
+		else if (mystate.state.status === "Drying Rack") {
+			color = "primary";
 		}else if (mystate.state.status === "Ready For Fitting") {
-			color = "info";
+			color = "success";
 		} else {
 			color = "success";
 		}
-		// switch(mystate.state.status){
-		// 	case "Complete":
-		// 		color = "default";
-		// 		break;
-		// 	case "Ready For Build":
-		// 		color = "warning";
-		// 		break;
-		// 	case "On Order":
-		// 		color = "info";
-		// 		break;
-		// 	case "Drying Rack":
-		// 		color = "dark";
-		// 		break;
-		// 	case "Complete":
-		// 		color = "success";
-		// 		break;
-		// 	default:
-		// 		color = "secondary";
-		// 		break;
-
-
-		// }
+		
 		let data = {};
 
 		if (!this.isEmpty(mystate.state.seven_iron_specs)) {

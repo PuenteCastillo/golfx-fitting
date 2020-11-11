@@ -49,7 +49,7 @@ class Data_Seven_Iron_Spec extends React.Component {
 				<Col md="6" xl="6">
 					<Card className="card-pricing border-0 text-center mb-4">
 						<CardHeader className="bg-transparent">
-							<h4 className="text-uppercase ls-1  py-3 mb-0">Current Club Specs</h4>
+							<h4 className="text-uppercase ls-1  py-3 mb-0">Current Specs</h4>
 						</CardHeader>
 						<CardBody className="px-lg-7">
 							<ul className="list-unstyled my-4">
