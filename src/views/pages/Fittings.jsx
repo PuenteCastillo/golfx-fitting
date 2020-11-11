@@ -180,12 +180,12 @@ class Fittings extends React.Component {
 			const customer = res.data;
 			let stringTest = "helloT000344";
 			let newString = stringTest.split("T")[0];
-			console.log( ' customer', customer);
+		
 			
 				for (let i = 0; i < customer.length; i++) {
 	
 			if(customer[i].fittings[0]){
-				console.log(customer[i].fittings[0])
+
 				customer[i].fittings[0].fitting_date =  moment(customer[i].fittings[0].fitting_date).format("YYYY-MM-DD");
 			}
 				
