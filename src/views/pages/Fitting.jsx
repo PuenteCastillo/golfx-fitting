@@ -302,12 +302,12 @@ class Fitting extends React.Component {
 		} else if (mystate.state.status === "Ready For Build") {
 			color = "warning";
 		} else if (mystate.state.status === "On Order") {
-			color = "info";
+			color = "secoundary";
 		}
-		else if (mystate.state.status === "Ready For Build") {
-			color = "info";
+		else if (mystate.state.status === "Drying Rack") {
+			color = "primary";
 		}else if (mystate.state.status === "Ready For Fitting") {
-			color = "info";
+			color = "success";
 		} else {
 			color = "success";
 		}
