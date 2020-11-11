@@ -157,13 +157,42 @@ class Fittings extends React.Component {
 		// console.log("hello");
 	};
 
+	sortfittingdate = (data) =>{
+
+		for (var i = 0; i < data.length; i++) {
+			// console.log(data[i].fittings[0].)
+		
+				console.log(data[i].fittings[0].id)
+			
+
+			// console.log(moment(data[i].fittings[0].fitting_date).format('YYYY-MM-DD'));
+
+			// for (var j = 0; j < data[i].length; j++) {
+
+			// }
+		
+			
+		  }
+
+	}
 	componentDidMount = () => {
 		axios.get(`https://kbsgolfx-db.herokuapp.com/customers?_limit=-1`).then((res) => {
 			const customer = res.data;
 			let stringTest = "helloT000344";
 			let newString = stringTest.split("T")[0];
 			console.log( ' customer', customer);
-
+			
+				for (let i = 0; i < customer.length; i++) {
+	
+			if(customer[i].fittings[0]){
+				console.log(customer[i].fittings[0])
+				customer[i].fittings[0].fitting_date =  moment(customer[i].fittings[0].fitting_date).format("YYYY-MM-DD");
+			}
+				
+			
+			  }
+	// this.sortfittingdate(customer);
+			  
 			this.setState({ customerList: customer, data: true });
 			this.sortDate();
 			// console.log("server", this.state.customerList);
