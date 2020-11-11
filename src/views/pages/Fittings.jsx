@@ -162,7 +162,7 @@ class Fittings extends React.Component {
 			const customer = res.data;
 			let stringTest = "helloT000344";
 			let newString = stringTest.split("T")[0];
-			// console.log(newString);
+			console.log( ' customer', customer);
 
 			this.setState({ customerList: customer, data: true });
 			this.sortDate();
@@ -314,7 +314,7 @@ class Fittings extends React.Component {
 								sort: true,
 							},
 							{
-								dataField: "last_fitted",
+								dataField: "fittings[0].fitting_date",
 								text: "Last Fitted",
 								sort: true,
 							},
@@ -443,6 +443,7 @@ class Fittings extends React.Component {
 			<>
 				{this.state.alert}
 				<SimpleHeader parentName="Fittings" />
+				
 				<Container className="mt--6" fluid>
 					<Row>
 						<div className="col">{this.renderTable()}</div>
