@@ -32,13 +32,26 @@ class FittingTable2 extends React.Component {
 		currentOem: "",
 		currentClub: "",
 		num: 1,
-		selected: []
+		selected: [],
+		clubType: "Irons"
 	};
-
+	componentWillMount = () => {
+		// console.log('props', this.props.table);
+		if(this.props.table){
+			this.setState({ clubType: this.props.table });
+		}
+		// console.log('table type', this.state.clubType);
+	}
 	componentDidMount = () => {
+		// console.log('props', this.props.table);
+		// if(this.props.table){
+		// 	this.setState({ clubType: this.props.table });
+		// }
+		// console.log('table type', this.state.clubType);
+		// var shaftType = this.state.clubType;
 		let myState = this;
 		// console.log('asdfasdf');
-		console.log("props in fitting table", this.props)
+		// console.log("props in fitting table", this.props)
 		if (this.props.startingData) {
 			for (let i = 0; i < this.props.startingData.length; i++) {
 				this.props.startingData[i].marked = "Delete";
@@ -61,15 +74,29 @@ class FittingTable2 extends React.Component {
 			.then(
 				axios.spread((oemRes, clubRes, productRes) => {
 					// do something with both responses
-					console.log('product red', productRes)
+					// console.log('product red', productRes)
+					// console.log('asdfasdf', this.state.clubType)
 					function sortDate(a, isOem) {
 						const data = a;
 						let items = [];
 						let singleItem = {};
 						let dataName = "";
 						for (let i = 0; i < data.length; i++) {
+							// console.log('data', data[i]);
 							dataName = data[i].brand_name || data[i].club_name || data[i].product_name;
-							singleItem = { value: dataName, label: dataName };
+							// if(shaftType =="WEDGE"){
+							// 	console.log('these are irons');
+							// }
+							// console.log("shaft type in here", shaftType)
+
+							
+							if(data[i].category){
+								var shaftCategory = data[i].category;
+								singleItem = { value: dataName, label: dataName, category: shaftCategory };
+							} else{
+								singleItem = { value: dataName, label: dataName };
+							}
+							// console.log(singleItem)
 							items.push(singleItem);
 						}
 						items.sort((a, b) => a.label.localeCompare(b.label));
@@ -78,7 +105,7 @@ class FittingTable2 extends React.Component {
 						} else if (isOem === "club") {
 							myState.setState({ clubOption: items });
 						} else if (isOem === "product") {
-							
+						
 							myState.setState({ productOption: items });
 
 						}
@@ -87,8 +114,30 @@ class FittingTable2 extends React.Component {
 					sortDate(oemRes.data, "oem");
 					sortDate(clubRes.data, "club");
 					sortDate(productRes.data, "product");
-					console.log('product options', this.state.productOption)
-
+					// console.log('product options', this.state.productOption)
+					// console.log("state of club", this.state.clubType)
+					if(this.state.clubType==="Irons"){
+						var shaftData = this.state.productOption;
+						var newData = shaftData.filter(club => club.category==="IRON");
+						this.setState({productOption: newData});
+					}else if(this.state.clubType==="WEDGE"){
+						var shaftData = this.state.productOption;
+						var newData = shaftData.filter(club => club.category==="WEDGE");
+						this.setState({productOption: newData});
+					}else if(this.state.clubType==="HYBRID"){
+						var shaftData = this.state.productOption;
+						var newData = shaftData.filter(club => club.category==="HYBRID");
+						this.setState({productOption: newData});
+					}else if(this.state.clubType==="WOOD"){
+						var shaftData = this.state.productOption;
+						var newData = shaftData.filter(club => club.category==="WOOD");
+						this.setState({productOption: newData});
+					}else if(this.state.clubType==="PUTTER"){
+						var shaftData = this.state.productOption;
+						var newData = shaftData.filter(club => club.category==="PUTTER");
+						this.setState({productOption: newData});
+					}
+					// console.log("dadafs", this.state.productOption);
 					// function getProductCat() {
 					// 	console.log("productRes.data", productRes.data);
 					// 	console.log("name", myState.props.table);
@@ -118,7 +167,7 @@ class FittingTable2 extends React.Component {
 	updateRow = (oldValue, newValue, row, column) => {
 		//if club is choosen
 		if (row.club_type) {
-			console.log(row.club_type);
+			// console.log(row.club_type);
 			this.setState({ currentClub: row.club_type });
 		}
 

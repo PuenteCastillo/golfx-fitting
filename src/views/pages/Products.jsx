@@ -236,7 +236,7 @@ class Products extends React.Component {
 			.then((res) => {
 				const Products = res.data;
 
-				console.log(Products);
+				console.log('these are products',Products);
 
 				this.setState({
 					ProductsList: Products,

@@ -129,7 +129,7 @@ class Fitting extends React.Component {
 			},
 		}).then((res) => {
 			let fitting = res.data;
-			console.log(fitting);
+			// console.log(fitting);
 			this.setState({
 				static_specs: fitting.static_specs,
 				seven_iron_specs: fitting.seven_iron_specs,
@@ -148,6 +148,7 @@ class Fitting extends React.Component {
 				fitting_id: fitting.id,
 			});
 		});
+		
 	};
 
 	Set_Staic_Specs = (data) => {
