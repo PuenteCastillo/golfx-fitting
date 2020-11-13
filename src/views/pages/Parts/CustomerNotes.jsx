@@ -19,21 +19,11 @@ import {
   Button,
   Card,
   CardHeader,
-  Container,
-  Row,
-  Col,
-  FormGroup,
+ 
   CardBody,
-  Input,
-  Label,
-  Collapse,
-  Nav,
-  NavItem,
-  NavLink,
-  TabContent,
-  TabPane,
+
   CardFooter,
-  CardTitle
+  
 } from "reactstrap";
 import { Link, Redirect } from "react-router-dom";
 

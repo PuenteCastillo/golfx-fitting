@@ -1,25 +1,5 @@
 import React from "react";
 import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image } from "@react-pdf/renderer";
-import {
-	Button,
-	Card,
-	CardHeader,
-	Container,
-	Row,
-	Col,
-	FormGroup,
-	CardBody,
-	Input,
-	Label,
-	Collapse,
-	Nav,
-	NavItem,
-	NavLink,
-	TabContent,
-	TabPane,
-	CardFooter
-} from "reactstrap";
-import FittingTable2 from "./FittingTable2";
 
 import kbsLogo from "../../assets/img/KBS-logo.png";
 // Create styles

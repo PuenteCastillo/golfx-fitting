@@ -16,7 +16,7 @@
 */
 import React from "react";
 import {
-	UncontrolledAlert,
+	// UncontrolledAlert,
 	Button,
 	Card,
 	CardHeader,
@@ -24,13 +24,10 @@ import {
 	FormGroup,
 	Form,
 	Input,
-	InputGroupAddon,
-	InputGroupText,
+
 	InputGroup,
 	Modal,
-	Container,
-	Row,
-	Col
+	
 } from "reactstrap";
 import classnames from "classnames";
 import Select2 from "react-select2-wrapper";

@@ -18,17 +18,13 @@ import React from "react";
 import {
 	UncontrolledAlert,
 	Button,
-	Card,
-	CardHeader,
-	CardBody,
+	
 	FormGroup,
 	Form,
 	Input,
-	InputGroupAddon,
-	InputGroupText,
-	InputGroup,
+
 	Modal,
-	Container,
+	
 	Row,
 	Col
 } from "reactstrap";
