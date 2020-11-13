@@ -113,6 +113,18 @@ class Data_Seven_Iron_Spec extends React.Component {
 										</div>
 									</div>
 								</li>
+								<li>
+									<div className="d-flex align-items-center">
+										<div>
+											<div className="icon icon-xs icon-shape bg-gradient-primary text-white shadow rounded-circle">
+											<i class="fas fa-weight-hanging"></i>
+											</div>
+										</div>
+										<div>
+											<span className="pl-2 text-sm">Swing Weight: {this.props.data.swing_weight || "N/A"}</span>
+										</div>
+									</div>
+								</li>
 							</ul>
 							<Button className="mb-3" color="primary" type="button" onClick={(e) => this.props.toggle(e)}>
 								Edit

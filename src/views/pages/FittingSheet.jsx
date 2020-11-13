@@ -407,7 +407,7 @@ class FittingSheet extends React.Component {
                     <CardBody>
                       <Row>
                         <Col md={{ size: "5" }}>
-                          <h3 className="mb-4">Static Specs</h3>
+                          <h3 className="mb-4">Static Specs </h3>
 
                           <FormGroup className="row">
                             <Label

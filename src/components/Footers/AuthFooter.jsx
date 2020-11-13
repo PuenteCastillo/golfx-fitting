@@ -33,7 +33,7 @@ class Login extends React.Component {
                   © {new Date().getFullYear()}{" "}
                   <a
                     className="font-weight-bold ml-1 text-center"
-                    href="https://www.creative-tim.com?ref=adpr-auth-footer"
+                    href="https://kbsgolfshafts.com/"
                     target="_blank"
                   >
                     KBS

@@ -57,7 +57,8 @@ class SpecModel extends React.Component {
 		newData.wrist_to_floor = document.getElementById("input-wrist_to_floor").value;
 		newData.normal_shot_shape = document.getElementById("input-normal_shot_shape").value;
 		newData.normal_trajectory = document.getElementById("input-normal_trajectory").value;
-
+		newData.handicap = document.getElementById("input-handicap").value;
+		newData.club_distance = document.getElementById("input-club_distance").value;
 		this.setState({ data: newData });
 
 		this.props.setSpec(this.state.data);
@@ -68,7 +69,7 @@ class SpecModel extends React.Component {
 		const { value } = this.props;
 		return (
 			<>
-				<Modal className="modal-dialog-centered" size="sm" isOpen={this.props.open} toggle={this.props.toggle}>
+				<Modal className="modal-dialog-centered" size="lg" isOpen={this.props.open} toggle={this.props.toggle}>
 					<div className="modal-body p-0">
 						<Card className="bg-secondary border-0 mb-0">
 							<CardHeader className="bg-transparent pb-5">
@@ -76,11 +77,16 @@ class SpecModel extends React.Component {
 									<small>Static Spec</small>
 								</div>
 							</CardHeader>
-							<CardBody className="px-lg-5 py-lg-5">
+							<CardBody className="px-lg-5 py-lg-5 ">
 								{/* <div className="text-center text-muted mb-4">
                                 <small>Or sign in with credentials</small>
                               </div> */}
+						
+
+								  
 								<Form role="form">
+								<div class="row">
+								  <div className="col-md-6">
 									<FormGroup
 										className={classnames("mb-3", {
 											focused: this.state.focuseHeight
@@ -158,7 +164,10 @@ class SpecModel extends React.Component {
 											}}
 										/>
 									</FormGroup>
-
+								
+						</div>
+					
+								  <div className="col-md-6">
 									<FormGroup>
 										<i class="fal fa-bow-arrow  modal-icon"></i>
 										<label className="form-control-label modal-lable" htmlFor="example3cols1Input">
@@ -184,6 +193,40 @@ class SpecModel extends React.Component {
 											}}
 										/>
 									</FormGroup>
+
+									<FormGroup>
+									
+										<i class="fab fa-accessible-icon  modal-icon"></i>
+										<label className="form-control-label modal-lable" htmlFor="example3cols1Input">
+										 Handicap
+										</label>
+										<Input
+												defaultValue={this.state.data.handicap}
+												placeholder="Handicap"
+												type="text"
+												id="input-handicap"
+												onFocus={() => this.setState({ focuseHandicap: true })}
+												onBlur={() => this.setState({ focuseHandicap: false })}
+											/>
+									</FormGroup>
+									<FormGroup>
+									
+										<i class="fas fa-drafting-compass  modal-icon"></i>
+										<label className="form-control-label modal-lable" htmlFor="example3cols1Input">
+										Club Distance
+										</label>
+										<Input
+												defaultValue={this.state.data.club_distance}
+												placeholder="Club Distance"
+												type="text"
+												id="input-club_distance"
+												onFocus={() => this.setState({ focuseClub_distance: true })}
+												onBlur={() => this.setState({ focuseClub_distance: false })}
+											/>
+									</FormGroup>
+</div>
+									</div>
+
 
 									<div className="text-center">
 										<Button className="my-4" color="primary" type="button" onClick={(e) => this.updateDate(e)}>
