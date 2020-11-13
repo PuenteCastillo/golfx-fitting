@@ -236,7 +236,7 @@ class Products extends React.Component {
 			.then((res) => {
 				const Products = res.data;
 
-				console.log('these are products',Products);
+				// console.log('these are products',Products);
 
 				this.setState({
 					ProductsList: Products,
@@ -245,7 +245,7 @@ class Products extends React.Component {
 				});
 
 				// this.sortDate();
-				console.log("ProductsList", this.state.ProductsList);
+				// console.log("ProductsList", this.state.ProductsList);
 				// this.renderStores();
 			});
 	};
