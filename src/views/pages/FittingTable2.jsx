@@ -35,14 +35,17 @@ class FittingTable2 extends React.Component {
 		selected: [],
 		clubType: "Irons"
 	};
-	componentWillMount = () => {
-		// console.log('props', this.props.table);
+	// componentWillMount = () => {
+	// 	// console.log('props', this.props.table);
+	// 	// if(this.props.table){
+	// 	// 	this.setState({ clubType: this.props.table });
+	// 	// }
+	// 	// console.log('table type', this.state.clubType);
+	// }
+	componentDidMount = () => {
 		if(this.props.table){
 			this.setState({ clubType: this.props.table });
 		}
-		// console.log('table type', this.state.clubType);
-	}
-	componentDidMount = () => {
 		// console.log('props', this.props.table);
 		// if(this.props.table){
 		// 	this.setState({ clubType: this.props.table });
