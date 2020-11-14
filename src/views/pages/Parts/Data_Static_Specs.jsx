@@ -19,21 +19,11 @@ import {
   Button,
   Card,
   CardHeader,
-  Container,
-  Row,
+ 
   Col,
-  FormGroup,
+
   CardBody,
-  Input,
-  Label,
-  Collapse,
-  Nav,
-  NavItem,
-  NavLink,
-  TabContent,
-  TabPane,
-  CardFooter,
-  CardTitle
+
 } from "reactstrap";
 
 
@@ -121,6 +111,38 @@ class Data_Static_Specs extends React.Component {
                         </div>
                       </div>
                     </li>
+
+                    <li>
+                      <div className="d-flex align-items-center">
+                        <div>
+                          <div className="icon icon-xs icon-shape bg-gradient-primary text-white shadow rounded-circle">
+                          <i class="fab fa-accessible-icon"></i>
+                          </div>
+                        </div>
+                        <div>
+                          <span className="pl-2 text-sm">
+                            Handicap: {this.props.data.handicap || 'N/A'}
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div className="d-flex align-items-center">
+                        <div>
+                          <div className="icon icon-xs icon-shape bg-gradient-primary text-white shadow rounded-circle">
+                          <i class="fas fa-drafting-compass"></i>
+                          </div>
+                        </div>
+                        <div>
+                          <span className="pl-2 text-sm">
+                            Club Distance: {this.props.data.club_distance|| 'N/A'}
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+
+
                     <li>
                       <div className="d-flex align-items-center">
                         <div>

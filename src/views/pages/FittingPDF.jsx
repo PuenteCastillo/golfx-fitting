@@ -1,25 +1,5 @@
 import React from "react";
 import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image } from "@react-pdf/renderer";
-import {
-	Button,
-	Card,
-	CardHeader,
-	Container,
-	Row,
-	Col,
-	FormGroup,
-	CardBody,
-	Input,
-	Label,
-	Collapse,
-	Nav,
-	NavItem,
-	NavLink,
-	TabContent,
-	TabPane,
-	CardFooter
-} from "reactstrap";
-import FittingTable2 from "./FittingTable2";
 
 import kbsLogo from "../../assets/img/KBS-logo.png";
 // Create styles
@@ -427,6 +407,8 @@ class FittingPDF extends React.Component {
 					<Text style={styles.label}> Wrist to Floor : {this.props.static_specs.wrist_to_floor || "N/A"}</Text>
 					<Text style={styles.label}> Normal shot shape : {this.props.static_specs.normal_shot_shape || "N/A"} </Text>
 					<Text style={styles.label}> Normal trajectory : {this.props.static_specs.normal_trajectory || "N/A"} </Text>
+					<Text style={styles.label}> Handicap: {this.props.static_specs.handicap || "N/A"} </Text>
+					<Text style={styles.label}> Club Distance: {this.props.static_specs.club_distance || "N/A"} </Text>
 				</View>
 			);
 		}
@@ -442,6 +424,7 @@ class FittingPDF extends React.Component {
 					<Text style={styles.label}> Loft : {this.props.seven_iron_specs.loft || "N/A"} </Text>
 					<Text style={styles.label}>FM : {this.props.seven_iron_specs.cpm || "N/A"} </Text>
 					<Text style={styles.label}>Grip Size : {this.props.seven_iron_specs.gripsize || "N/A"} </Text>
+					<Text style={styles.label}>Swing Weight : {this.props.seven_iron_specs.swing_weight || "N/A"} </Text>
 				</View>
 			);
 		}

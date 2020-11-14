@@ -266,7 +266,7 @@ class FittingSheetNewView extends React.Component {
 		} else {
 			return (
 				<AppCard
-					title="Static Specs"
+					title="Static Specs "
 					btnText="Add specs"
 					icon="fad fa-ruler display-2"
 					style="icon icon-shape bg-gradient-red text-dark rounded-circle shadow"

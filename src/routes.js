@@ -14,46 +14,46 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Alternative from "views/pages/dashboards/Alternative.jsx";
-import Buttons from "views/pages/components/Buttons.jsx";
+// import Alternative from "views/pages/dashboards/Alternative.jsx";
+// import Buttons from "views/pages/components/Buttons.jsx";
 import Calendar from "views/pages/Calendar.jsx";
-import Cards from "views/pages/components/Cards.jsx";
-import Charts from "views/pages/Charts.jsx";
-import Components from "views/pages/forms/Components.jsx";
-import Dashboard from "views/pages/dashboards/Dashboard.jsx";
-import Elements from "views/pages/forms/Elements.jsx";
-import Google from "views/pages/maps/Google.jsx";
-import Grid from "views/pages/components/Grid.jsx";
-import Icons from "views/pages/components/Icons.jsx";
-import Lock from "views/pages/examples/Lock.jsx";
-import Login from "./views/pages/Login";
-import Notifications from "views/pages/components/Notifications.jsx";
-import Pricing from "views/pages/examples/Pricing.jsx";
-import Profile from "views/pages/examples/Profile.jsx";
-import ReactBSTables from "views/pages/tables/ReactBSTables.jsx";
-import Register from "views/pages/examples/Register.jsx";
-import Sortable from "views/pages/tables/Sortable.jsx";
-import Tables from "views/pages/tables/Tables.jsx";
-import Timeline from "views/pages/examples/Timeline.jsx";
-import Typography from "views/pages/components/Typography.jsx";
-import Validation from "views/pages/forms/Validation.jsx";
-import Vector from "views/pages/maps/Vector.jsx";
-import Widgets from "views/pages/Widgets.jsx";
-import AppDashboard from "./views/pages/dashboards/AppDashboard";
+// import Cards from "views/pages/components/Cards.jsx";
+// import Charts from "views/pages/Charts.jsx";
+// import Components from "views/pages/forms/Components.jsx";
+// import Dashboard from "views/pages/dashboards/Dashboard.jsx";
+// import Elements from "views/pages/forms/Elements.jsx";
+// import Google from "views/pages/maps/Google.jsx";
+// import Grid from "views/pages/components/Grid.jsx";
+// import Icons from "views/pages/components/Icons.jsx";
+// import Lock from "views/pages/examples/Lock.jsx";
+// import Login from "./views/pages/Login";
+// import Notifications from "views/pages/components/Notifications.jsx";
+// import Pricing from "views/pages/examples/Pricing.jsx";
+// import Profile from "views/pages/examples/Profile.jsx";
+// import ReactBSTables from "views/pages/tables/ReactBSTables.jsx";
+// import Register from "views/pages/examples/Register.jsx";
+// import Sortable from "views/pages/tables/Sortable.jsx";
+// import Tables from "views/pages/tables/Tables.jsx";
+// import Timeline from "views/pages/examples/Timeline.jsx";
+// import Typography from "views/pages/components/Typography.jsx";
+// import Validation from "views/pages/forms/Validation.jsx";
+// import Vector from "views/pages/maps/Vector.jsx";
+// import Widgets from "views/pages/Widgets.jsx";
+// import AppDashboard from "./views/pages/dashboards/AppDashboard";
 import Fittings from "./views/pages/Fittings";
 import AppProfile from "./views/pages/AppProfile";
 import AddGolfer from "./views/pages/AddGolfer";
 import AddEmployee from "./views/pages/AddEmployee";
-import Clubs from "./views/pages/Clubs";
-import FittingSheet from "./views/pages/FittingSheet";
-import FittingSheetView from "./views/pages/FittingSheetView";
+// import Clubs from "./views/pages/Clubs";
+// import FittingSheet from "./views/pages/FittingSheet";
+// import FittingSheetView from "./views/pages/FittingSheetView";
 import Products from "./views/pages/Products";
-import FittingPDF from "./views/pages/FittingPDF";
+// import FittingPDF from "./views/pages/FittingPDF";
 import FittingSheetNew from "./views/pages/FittingSheetNew";
-import FittingSheetNewView from "./views/pages/FittingSheetNewView";
+// import FittingSheetNewView from "./views/pages/FittingSheetNewView";
 import Fitting from "./views/pages/Fitting";
 
-import classnames from "classnames";
+// import classnames from "classnames";
 
 let role = false;
 

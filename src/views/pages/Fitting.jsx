@@ -11,35 +11,29 @@ import {
 	Col,
 	FormGroup,
 	CardBody,
-	Input,
-	Label,
+	
 	Collapse,
-	Nav,
-	NavItem,
-	NavLink,
-	TabContent,
-	TabPane,
-	CardFooter,
+
 } from "reactstrap";
 import classnames from "classnames";
 // core components
 import LoadingScreen from "./LoadingScreen";
-import FittingHeader from "components/Headers/FittingHeader.jsx";
+// import FittingHeader from "components/Headers/FittingHeader.jsx";
 import SimpleHeader from "components/Headers/SimpleHeader.jsx";
 import FittingTable2 from "./FittingTable2";
 import FittingTablePutter from "./FittingTablePutter";
-import { Prompt } from "react-router";
+// import { Prompt } from "react-router";
 import axios from "axios";
-import AppCard from "./Parts/AppCard";
+// import AppCard from "./Parts/AppCard";
 import CustomerNotes from "./Parts/CustomerNotes";
-import SpecModel from "./Parts/SpecModel";
-import Seven_iron_Model from "./Parts/Seven_iron_Model";
+// import SpecModel from "./Parts/SpecModel";
+// import Seven_iron_Model from "./Parts/Seven_iron_Model";
 
-import Data_Static_Specs from "./Parts/Data_Static_Specs";
-import Data_Seven_Iron_Spec from "./Parts/Data_Seven_Iron_Spec";
+// import Data_Static_Specs from "./Parts/Data_Static_Specs";
+// import Data_Seven_Iron_Spec from "./Parts/Data_Seven_Iron_Spec";
 import Iron_table_Modal from "./Parts/Iron_table_Modal";
 
-import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from "@react-pdf/renderer";
+import {  PDFDownloadLink } from "@react-pdf/renderer";
 import FittingPDF from "./FittingPDF";
 import Static_specs from "./FittingParts/Static_specs";
 import Seven_iron_specs from "./FittingParts/Seven_iron_specs";
@@ -47,9 +41,9 @@ import Fitting_notes from "./FittingParts/Fitting_notes";
 import Building_notes from "./FittingParts/Building_notes";
 import ReactDatetime from "react-datetime";
 import moment from "moment";
-import { thisExpression } from "@babel/types";
+// import { thisExpression } from "@babel/types";
 import Select2 from "react-select2-wrapper";
-import { stat } from "fs";
+// import { stat } from "fs";
 
 const clubSelect = [
 	{ value: "2", label: "2" },

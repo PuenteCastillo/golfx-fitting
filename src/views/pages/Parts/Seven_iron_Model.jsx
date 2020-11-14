@@ -16,7 +16,7 @@
 */
 import React from "react";
 import {
-	UncontrolledAlert,
+	// UncontrolledAlert,
 	Button,
 	Card,
 	CardHeader,
@@ -24,13 +24,10 @@ import {
 	FormGroup,
 	Form,
 	Input,
-	InputGroupAddon,
-	InputGroupText,
+
 	InputGroup,
 	Modal,
-	Container,
-	Row,
-	Col
+	
 } from "reactstrap";
 import classnames from "classnames";
 import Select2 from "react-select2-wrapper";
@@ -56,6 +53,7 @@ class Seven_iron_Model extends React.Component {
 		newData.loft = document.getElementById("input-loft").value;
 		newData.cpm = document.getElementById("input-cpm").value;
 		newData.gripsize = document.getElementById("input-gripsize").value;
+		newData.swing_weight = document.getElementById("input-swing_weight").value;
 
 		this.setState({ data: newData });
 		this.props.setSeven_iron(this.state.data);
@@ -65,7 +63,7 @@ class Seven_iron_Model extends React.Component {
 	render() {
 		return (
 			<>
-				<Modal className="modal-dialog-centered" size="sm" isOpen={this.props.open} toggle={this.props.toggle}>
+				<Modal className="modal-dialog-centered" size="lg" isOpen={this.props.open} toggle={this.props.toggle}>
 					<div className="modal-body p-0">
 						<Card className="bg-secondary border-0 mb-0">
 							<CardHeader className="bg-transparent pb-5">
@@ -78,6 +76,10 @@ class Seven_iron_Model extends React.Component {
                                 <small>Or sign in with credentials</small>
                               </div> */}
 								<Form role="form">
+									<div className="row">
+										<div className="col-md-6">
+
+									
 									<FormGroup
 										className={classnames("mb-3", {
 											focused: this.state.focusLength
@@ -141,6 +143,10 @@ class Seven_iron_Model extends React.Component {
 										</InputGroup>
 									</FormGroup>
 
+									</div>
+										<div className="col-md-6">
+									
+
 									<FormGroup
 										className={classnames("mb-3", {
 											focused: this.state.focusCPM
@@ -201,6 +207,33 @@ class Seven_iron_Model extends React.Component {
 											}}
 										/>
 									</FormGroup>
+
+									<FormGroup
+										className={classnames("mb-3", {
+											focused: this.state.focusGripSize
+										})}
+									>
+										
+										<i class="fas fa-weight-hanging modal-icon"></i>
+										<label className="form-control-label modal-lable" htmlFor="example3cols1Input">
+											Swing Weight 
+										</label>
+										<InputGroup className="input-group-merge input-group-alternative">
+											<Input
+												defaultValue={this.state.data.swing_weight}
+												placeholder="Swing Weight"
+												type="text"
+												id="input-swing_weight"
+												onFocus={() => this.setState({ focusSwing_weight: true })}
+												onBlur={() => this.setState({ focusSwing_weight: false })}
+											/>
+										</InputGroup>
+										
+									</FormGroup>
+											
+									</div>
+									</div>
+
 
 									<div className="text-center">
 										<Button className="my-4" color="primary" type="button" onClick={(e) => this.updateDate(e)}>
