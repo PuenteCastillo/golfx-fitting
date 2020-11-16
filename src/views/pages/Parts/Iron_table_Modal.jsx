@@ -538,7 +538,7 @@ class Iron_table_Modal extends React.Component {
 										})}
 									>
 										<label className="form-control-label" htmlFor="exampleFormControlInput1">
-											Oem
+											OEM
 										</label>
 										<Select2
 											className="form-control"
