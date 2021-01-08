@@ -270,7 +270,7 @@ let profile_id = response.data.id;
         <SimpleHeader name="Add Golfer" parentName="Customer" >
           <Button className="btn-neutral" color="default" size="lg" onClick={e => this.newGolfer(e)} disabled={this.state.btnDisable}>
             {/* Save */}
-            {this.state.btnDisable ? 'Lading...' : 'Save'}
+            {this.state.btnDisable ? `Loading...` : 'Save'}
                   </Button>
           {/* <CardFooter className="bg-transparent">
                   <Button block color="primary" size="lg" type="button" disabled={this.state.btnDisable} onClick={e => this.newGolfer(e)}>
