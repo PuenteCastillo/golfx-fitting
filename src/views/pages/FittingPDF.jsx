@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 	},
 	sectionData: {
 		width: 82,
-		minHeight: 20,
+		minHeight: 15,
 		padding: 3,
 		flexGrow: 4
 		// borderLeft: 0.5,
@@ -118,10 +118,10 @@ const styles = StyleSheet.create({
 		borderBottom: 0.5
 	},
 	cellText: {
-		fontSize: 10
+		fontSize: 8
 	},
 	spacer: {
-		height: 20
+		height: 10
 	},
 	label: {
 		fontSize: 10,
@@ -430,6 +430,28 @@ class FittingPDF extends React.Component {
 		}
 	};
 
+	Building_Notes = () => {
+		if (!this.isEmpty(this.props.building_notes)) {
+			return (
+				<View style={styles.sectionData}>
+							<Text style={styles.specheader}> Building Notes:</Text>
+							<Text style={styles.label}> {this.props.building_notes || "N/A"} </Text>
+				</View>
+			);
+		}
+	};
+
+	Customer_Notes = () => {
+		if (!this.isEmpty(this.props.fitting_notess)) {
+			return (
+				<View style={styles.sectionData}>
+							<Text style={styles.specheader}> Customer Notes:</Text>
+							<Text style={styles.label}> {this.props.fitting_notes || "N/A"} </Text>
+						</View>
+			);
+		}
+	};
+
 	render() {
 		return (
 			<Document>
@@ -445,14 +467,8 @@ class FittingPDF extends React.Component {
 					</View>
 					<View style={styles.spacer}></View>
 					<View style={styles.rowData}>
-						<View style={styles.sectionData}>
-							<Text style={styles.specheader}> Building Notes:</Text>
-							<Text style={styles.label}> {this.props.building_notes || "N/A"} </Text>
-						</View>
-						<View style={styles.sectionData}>
-							<Text style={styles.specheader}> Customer Notes:</Text>
-							<Text style={styles.label}> {this.props.fitting_notes || "N/A"} </Text>
-						</View>
+						{this.Building_Notes()}
+						{this.Customer_Notes()}
 					</View>
 					<View style={styles.spacer}></View>
 
