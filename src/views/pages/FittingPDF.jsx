@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 		width: 100
 	},
 	title: {
-		fontSize: 24
+		fontSize: 20
 		// textAlign: 'center',
 		// fontFamily: 'Oswald'
 	},
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 		color: "grey"
 	},
 	specheader: {
-		fontSize: 12,
+		fontSize: 10,
 		marginBottom: 5,
 
 		color: "grey"
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 	},
 	sectionData: {
 		width: 82,
-		minHeight: 20,
+		minHeight: 15,
 		padding: 3,
 		flexGrow: 4
 		// borderLeft: 0.5,
@@ -118,13 +118,22 @@ const styles = StyleSheet.create({
 		borderBottom: 0.5
 	},
 	cellText: {
-		fontSize: 10
+		fontSize: 8
 	},
 	spacer: {
-		height: 20
+		height: 10
+	},
+	spacer2: {
+		height: 5
 	},
 	label: {
+		fontSize: 8,
+		color: "black"
+	},
+	label2: {
 		fontSize: 10,
+		marginBottom: 5,
+		textTransform: 'capitalize',
 		color: "black"
 	}
 });
@@ -375,9 +384,15 @@ class FittingPDF extends React.Component {
 				<View style={styles.sectionData}>
 					<Image style={styles.logo} src={kbsLogo} />
 				</View>
+				
+				
 				<View style={styles.sectionData}>
-					<Text style={styles.name}> {this.props.customer_info.name} </Text>
+			<Text> </Text>
 				</View>
+				<View style={styles.sectionData}>
+					 {this.player_data()}
+				</View>
+				
 			</View>
 		);
 	};
@@ -385,14 +400,11 @@ class FittingPDF extends React.Component {
 	player_data = () => {
 		return (
 			<View>
-				<Text style={styles.specheader}> Player Information:</Text>
-				<Text style={styles.label}> Name : {this.props.customer_info.name_first + " " + this.props.customer_info.name_last || "N/A"} </Text>
-				<Text style={styles.label}> Phone# : {this.props.customer_info.phone || "N/A"}</Text>
+				{/* <Text style={styles.specheader}> Player Information:</Text> */}
+				<Text style={styles.label2}>{this.props.customer_info.name_first + " " + this.props.customer_info.name_last || "N/A"} </Text>
+				<Text></Text>
+				<Text style={styles.label}> Phone # : {this.props.customer_info.phone || "N/A"}</Text>
 				<Text style={styles.label}> Email : {this.props.customer_info.email || "N/A"}</Text>
-				<Text style={styles.label}> Address : {this.props.customer_info.address || "N/A"}</Text>
-				<Text style={styles.label}> City : {this.props.customer_info.city || "N/A"}</Text>
-				<Text style={styles.label}> State : {this.props.customer_info.state || "N/A"} </Text>
-				<Text style={styles.label}> Zipcode : {this.props.customer_info.zipcode || "N/A"}</Text>
 			</View>
 		);
 	};
@@ -430,6 +442,28 @@ class FittingPDF extends React.Component {
 		}
 	};
 
+	Building_Notes = () => {
+		if (!this.isEmpty(this.props.building_notes)) {
+			return (
+				<View style={styles.sectionData}>
+							<Text style={styles.specheader}> Builder Notes:</Text>
+							<Text style={styles.label}> {this.props.building_notes || "N/A"} </Text>
+				</View>
+			);
+		}
+	};
+
+	Customer_Notes = () => {
+		if (!this.isEmpty(this.props.fitting_notes)) {
+			return (
+				<View style={styles.sectionData}>
+							<Text style={styles.specheader}> Customer Notes:</Text>
+							<Text style={styles.label}> {this.props.fitting_notes || "N/A"} </Text>
+						</View>
+			);
+		}
+	};
+
 	render() {
 		return (
 			<Document>
@@ -439,31 +473,23 @@ class FittingPDF extends React.Component {
 					<View style={styles.spacer}></View>
 
 					<View style={styles.rowData}>
-						<View style={styles.sectionData}>{this.player_data()}</View>
 						<View style={styles.sectionData}>{this.static_data()}</View>
-						<View style={styles.sectionData}>{this.seven_iron_specs()}</View>
+						<View style={styles.sectionData}>{this.Customer_Notes()}</View>
+						<View style={styles.sectionData}>{this.Building_Notes()}</View>
+						
 					</View>
 					<View style={styles.spacer}></View>
-					<View style={styles.rowData}>
-						<View style={styles.sectionData}>
-							<Text style={styles.specheader}> Building Notes:</Text>
-							<Text style={styles.label}> {this.props.building_notes || "N/A"} </Text>
-						</View>
-						<View style={styles.sectionData}>
-							<Text style={styles.specheader}> Customer Notes:</Text>
-							<Text style={styles.label}> {this.props.fitting_notes || "N/A"} </Text>
-						</View>
-					</View>
-					<View style={styles.spacer}></View>
+					
+					
 
 					{this.Make_table("Irons", this.props.irons)}
-					<View style={styles.spacer}></View>
+					<View style={styles.spacer2}></View>
 					{this.Make_table("Hybrids", this.props.hybrids)}
-					<View style={styles.spacer}></View>
+					<View style={styles.spacer2}></View>
 					{this.Make_table("Woods", this.props.woods)}
-					<View style={styles.spacer}></View>
+					<View style={styles.spacer2}></View>
 					{this.Make_table("Wedges", this.props.wedge)}
-					<View style={styles.spacer}></View>
+					<View style={styles.spacer2}></View>
 					{this.Make_Putter("Putter", this.props.putter)}
 
 					<Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`} fixed />
