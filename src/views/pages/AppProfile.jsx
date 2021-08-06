@@ -230,6 +230,10 @@ activity.push(
     console.log('notes', document.getElementById('input-fitting-notes').value)
     console.log('email', document.getElementById('input-email').value)
 
+    let Mydata = {};
+
+
+
     axios({
       method: 'put',
       url: 'https://kbsgolfx-db.herokuapp.com/customers/' + this.state.profile.id,
@@ -238,25 +242,26 @@ activity.push(
       },
       data: {
         id: 1,
-        name_first: document.getElementById('input-first-name').value,
-        name_last: document.getElementById('input-last-name').value,
-        phone: document.getElementById('input-phone').value,
-        email: document.getElementById('input-email').value,
-        address: document.getElementById('input-address').value,
-        city: document.getElementById('input-city').value,
-        state: document.getElementById('input-country').value,
-        zipcode: document.getElementById('input-postal-code').value,
-        fitting_notes: document.getElementById('input-fitting-notes').value,
-        fittings: this.state.Fitting_Note,
-        updates: activity
+        name_first: document.getElementById('input-first-name').value || null,
+        name_last: document.getElementById('input-last-name').value || null,
+        phone: document.getElementById('input-phone').value || null,
+        email: document.getElementById('input-email').value || null,
+        address: document.getElementById('input-address').value || null,
+        city: document.getElementById('input-city').value || null,
+        state: document.getElementById('input-country').value || null,
+        zipcode: document.getElementById('input-postal-code').value || null,
+        fitting_notes: document.getElementById('input-fitting-notes').value || null,
+        // fittings: this.state.Fitting_Note || null,
+        updates: activity || null,
       }
     })
       .then(function (response) {
         console.log(response);
         window.location.reload(false);
       })
-      .catch(function (error) {
+      .catch((error) =>{
         console.log(error.response);
+        console.log("didn't work!")
         this.setState({ showLoad: false });
       });
 
@@ -706,7 +711,7 @@ console.log('updating activity');
                             <Input
                               defaultValue={this.state.profile.phone}
                               id="input-phone"
-                              placeholder="Username"
+                              placeholder="##########"
                               type="text"
                               onChange={e => this.handleChange()}
                             />
