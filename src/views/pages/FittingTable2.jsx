@@ -22,11 +22,17 @@ class FittingTable2 extends React.Component {
 				club_type: "",
 				shaft_type: "",
 				flex: "",
+				Club_status:"",
 				marked: "Delete"
 			}
 		],
 		clubOption: [],
 		productOption: [],
+		statusOptions: [
+		{label: "Ready for Build", value: "Ready for Build"},
+		{label: "Ignore", value: "Ignore"},
+		{label: "Completed", value: "Completed"},
+		{label: "Picked Up", value: "Picked Up"}],
 		oem: [],
 		oemNames: [],
 		currentOem: "",
@@ -127,6 +133,7 @@ class FittingTable2 extends React.Component {
 						var shaftData = this.state.productOption;
 						var newData = shaftData.filter(club => club.category==="WEDGE");
 						this.setState({productOption: newData});
+						console.log('how data is brokendown', newData);
 					}else if(this.state.clubType==="HYBRID"){
 						var shaftData = this.state.productOption;
 						var newData = shaftData.filter(club => club.category==="HYBRID");
@@ -236,6 +243,7 @@ class FittingTable2 extends React.Component {
 			club_type: this.state.currentClub,
 			shaft_type: "",
 			flex: "",
+			Club_status:"Ready for Build",
 			hideDetail: false,
 			marked: "Delete"
 		};
@@ -281,6 +289,7 @@ class FittingTable2 extends React.Component {
 					club_type: "",
 					shaft_type: "",
 					flex: "",
+					Club_status:"",
 					marked: "Delete"
 				}
 			];
@@ -363,6 +372,14 @@ class FittingTable2 extends React.Component {
 							{
 								dataField: "flex",
 								text: "Flex"
+							},
+							{
+								dataField: "Club_status",
+								text: "club status",
+								editor: {
+									type: Type.SELECT,
+									options: this.state.statusOptions
+								}
 							},
 
 							{

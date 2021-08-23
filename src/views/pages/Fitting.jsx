@@ -123,7 +123,7 @@ class Fitting extends React.Component {
 			},
 		}).then((res) => {
 			let fitting = res.data;
-			// console.log(fitting);
+			console.log('getting fitting',fitting);
 			this.setState({
 				static_specs: fitting.static_specs,
 				seven_iron_specs: fitting.seven_iron_specs,
@@ -161,23 +161,94 @@ class Fitting extends React.Component {
 	updateIrons = (data) => {
 		this.setState({ irons: data, didStateChange: true });
 		console.log(this.state.irons);
+		this.check_status();
 	};
 	updateHybrids = (data) => {
 		this.setState({ hybrids: data, didStateChange: true });
 		console.log(this.state.hybrids);
+		this.check_status();
 	};
 	updateWoods = (data) => {
 		this.setState({ woods: data, didStateChange: true });
 		console.log(this.state.woods);
+		this.check_status();
 	};
 	updateWedges = (data) => {
 		this.setState({ wedges: data, didStateChange: true });
 		console.log(this.state.wedges);
+		this.check_status();
 	};
 	updatePutters = (data) => {
 		this.setState({ putter: data, didStateChange: true });
 		console.log(this.state.putter);
+		this.check_status();
 	};
+
+	check_status = (data) => {
+		let exisitingClub = [];
+
+		if(this.state.irons){
+			let Irons =this.state.irons;
+			exisitingClub = exisitingClub.concat(Irons);
+		}
+
+		if(this.state.hybrids){
+			exisitingClub = exisitingClub.concat(this.state.hybrids);
+		}
+
+		if(this.state.woods){
+			exisitingClub = exisitingClub.concat(this.state.woods);
+		}
+
+		if(this.state.wedges){
+			exisitingClub = exisitingClub.concat(this.state.wedges);
+		}
+
+		if(this.state.putter){
+			exisitingClub = exisitingClub.concat(this.state.putter);
+		}
+		console.log('output', exisitingClub);
+		console.log('items in table', exisitingClub.length);
+
+		
+var arrayLength = exisitingClub.length;
+var CompleteCount = 0;
+var PickedUpCount = 0;
+for (var i = 0; i < arrayLength; i++) {
+    console.log(exisitingClub[i].Club_status);
+	
+	if(exisitingClub[i].Club_status === 'Picked Up'){
+		PickedUpCount ++;
+
+		if(PickedUpCount === arrayLength){ 
+			this.setState({
+				status: "Complete",
+			
+			})
+		}
+	}
+
+	if(exisitingClub[i].Club_status === 'Completed' || exisitingClub[i].Club_status === 'Ignore'){
+		CompleteCount ++;
+		if(CompleteCount  === arrayLength){ 
+			console.log('all are completed');
+			this.setState({
+				status: "Drying Rack",
+			
+			})
+
+
+		}
+	}
+    //Do something
+}
+		
+		// console.log('Irons',this.state.irons);
+		// console.log('hybrids',this.state.hybrids);
+		// console.log('Woods',this.state.woods);
+		// console.log('Wedges',this.state.wedges);
+		// console.log('putter',this.state.putter);
+	}
 	render_print = () => {
 		if (this.state.axiosComplete && this.state.didStateChange === false) {
 			return (
