@@ -151,7 +151,8 @@ class Iron_table_Modal extends React.Component {
 					oem: myState.state.sevenIron.oem,
 					club_type: myState.state.sevenIron.club_type,
 					shaft_type: myState.state.sevenIron.shaft_type,
-					flex: myState.state.sevenIron.flex
+					flex: myState.state.sevenIron.flex,
+					Club_status:'Ready for Build'
 				},
 				{
 					id: 103,
@@ -167,7 +168,8 @@ class Iron_table_Modal extends React.Component {
 					oem: myState.state.sevenIron.oem,
 					club_type: myState.state.sevenIron.club_type,
 					shaft_type: myState.state.sevenIron.shaft_type,
-					flex: myState.state.sevenIron.flex
+					flex: myState.state.sevenIron.flex,
+					Club_status:'Ready for Build'
 				},
 				{
 					id: 104,
@@ -183,7 +185,8 @@ class Iron_table_Modal extends React.Component {
 					oem: myState.state.sevenIron.oem,
 					club_type: myState.state.sevenIron.club_type,
 					shaft_type: myState.state.sevenIron.shaft_type,
-					flex: myState.state.sevenIron.flex
+					flex: myState.state.sevenIron.flex,
+					Club_status:'Ready for Build'
 				},
 				{
 					id: 105,
@@ -198,7 +201,8 @@ class Iron_table_Modal extends React.Component {
 					oem: myState.state.sevenIron.oem,
 					club_type: myState.state.sevenIron.club_type,
 					shaft_type: myState.state.sevenIron.shaft_type,
-					flex: myState.state.sevenIron.flex
+					flex: myState.state.sevenIron.flex,
+					Club_status:'Ready for Build'
 				},
 				{
 					id: 106,
@@ -214,7 +218,8 @@ class Iron_table_Modal extends React.Component {
 					oem: myState.state.sevenIron.oem,
 					club_type: myState.state.sevenIron.club_type,
 					shaft_type: myState.state.sevenIron.shaft_type,
-					flex: myState.state.sevenIron.flex
+					flex: myState.state.sevenIron.flex,
+					Club_status:'Ready for Build'
 				},
 				{
 					id: 107,
@@ -228,7 +233,8 @@ class Iron_table_Modal extends React.Component {
 					oem: myState.state.sevenIron.oem,
 					club_type: myState.state.sevenIron.club_type,
 					shaft_type: document.getElementById("input-shaft-type-table").value,
-					flex: myState.state.sevenIron.flex
+					flex: myState.state.sevenIron.flex,
+					Club_status:'Ready for Build'
 				},
 				{
 					id: 108,
@@ -244,7 +250,8 @@ class Iron_table_Modal extends React.Component {
 					oem: myState.state.sevenIron.oem,
 					club_type: myState.state.sevenIron.club_type,
 					shaft_type: myState.state.sevenIron.shaft_type,
-					flex: myState.state.sevenIron.flex
+					flex: myState.state.sevenIron.flex,
+					Club_status:'Ready for Build'
 				},
 				{
 					id: 109,
@@ -260,7 +267,8 @@ class Iron_table_Modal extends React.Component {
 					oem: myState.state.sevenIron.oem,
 					club_type: myState.state.sevenIron.club_type,
 					shaft_type: myState.state.sevenIron.shaft_type,
-					flex: myState.state.sevenIron.flex
+					flex: myState.state.sevenIron.flex,
+					Club_status:'Ready for Build'
 				},
 				{
 					id: 110,
@@ -276,7 +284,8 @@ class Iron_table_Modal extends React.Component {
 					oem: myState.state.sevenIron.oem,
 					club_type: myState.state.sevenIron.club_type,
 					shaft_type: myState.state.sevenIron.shaft_type,
-					flex: myState.state.sevenIron.flex
+					flex: myState.state.sevenIron.flex,
+					Club_status:'Ready for Build'
 				}
 			];
 
@@ -299,7 +308,8 @@ class Iron_table_Modal extends React.Component {
 			oem: document.getElementById("input-oem-table").value,
 			club_type: document.getElementById("input-club-type-table").value,
 			shaft_type: document.getElementById("input-shaft-type-table").value,
-			flex: document.getElementById("input-flex-table").value
+			flex: document.getElementById("input-flex-table").value,
+			Club_status:'Ready for Build'
 		};
 
 		if (data.loft || data.lie || data.cpm) {
