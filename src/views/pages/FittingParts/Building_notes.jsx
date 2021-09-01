@@ -48,7 +48,7 @@ class Building_notes extends React.Component {
   textArea = () => {
     
     return (
-      <Col md="12">
+      // <Col md="12" xl="12">
 
         <Card className="card-pricing border-0 text-center mb-4">
           <CardHeader className="bg-transparent">
@@ -75,7 +75,7 @@ class Building_notes extends React.Component {
         </Card>
 
 
-      </Col>
+      // </Col>
     );
   }
   render_module = () => {

@@ -215,6 +215,8 @@ class FittingTable2 extends React.Component {
 	// `   '`---'`---'    `  `'`---'`-'-'    `   ``---'`-'-'
 
 	newRow = () => {
+
+		this.props.simplifiedFunction('adding a new row');
 		let num = this.state.num;
 		console.log("test num", num);
 		num += 1;
@@ -263,8 +265,9 @@ class FittingTable2 extends React.Component {
 		let irons = this.state.irons;
 
 		console.log(irons.length);
-		if (irons.length > 1) {
+		if (irons.length > 0) {
 			// find object in array and delete
+			console.log( 'length is greather then one');
 			for (var i = 0; i < irons.length; i++) {
 				var obj = irons[i];
 				if (irons[i].id === row.id) {
@@ -272,7 +275,13 @@ class FittingTable2 extends React.Component {
 				}
 			}
 			//set new Irons
+			console.log(irons.length );
+			if(irons.length === 0 ){
+				irons = [];		
+			}
 			this.setState({ irons: irons });
+
+			console.log( this.state.irons );
 		} else {
 			console.log("no thanks ");
 			let emptyIrons = [
@@ -300,16 +309,33 @@ class FittingTable2 extends React.Component {
 
 	render() {
 		const selectRow = {
-			// mode: "checkbox",
-			// clickToSelect: true,
-			// selectColumnPosition: "right",
-			clickToEdit: true
-		};
+			// mode: 'radio',  // multi select
+			clickToSelect: true,
 
+			bgColor: function(row, isSelect) {
+				// row
+				return 'red';
+			//   if (isSelect) {
+			// 	const { id } = row;
+			// 	if (id < 2) return 'blue';
+			// 	else if (id < 4) return 'red';
+			// 	else return 'yellow';
+			//   }
+			//   return null;
+			}
+		  };
+
+		const options = {
+			expandRowBgColor: 'rgb(242, 255, 163)'
+		  };
 		return (
 			<>
-				<div className="max-100w">
+				
+				<div className={`max-100w ${this.state.irons.length ? "" : "hide"}`}>
+
+				
 					<BootstrapTable
+				
 						keyField="id"
 						data={this.state.irons}
 						columns={[
@@ -394,7 +420,7 @@ class FittingTable2 extends React.Component {
 							}
 						]}
 						onTableChange={this.handleTableChange}
-						// selectRow={selectRow}
+						
 						cellEdit={cellEditFactory({
 							mode: "click",
 							blurToSave: true,
@@ -402,12 +428,15 @@ class FittingTable2 extends React.Component {
 								this.updateRow(oldValue, newValue, row, column);
 							}
 						})}
+						// options= { options }
+						// selectRow={selectRow}
 					/>
-
-					<Button block className="text-primary shadow-none " color="white" size="lg" type="button" onClick={this.newRow}>
-						<i className="fas fa-plus addRow"></i>
-					</Button>
+			
 				</div>
+				<Button block className=" shadow-none add-more-btn " color="white" size="lg" type="button" onClick={this.newRow}>
+						<i className="fas fa-plus"></i> Add Club
+						  
+					</Button>
 			</>
 		);
 	}

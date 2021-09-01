@@ -578,7 +578,7 @@ class FittingSheetNew extends React.Component {
 												<CardBody>{this.render_irons()}</CardBody>
 											</Card>
 										</Collapse>
-										<CardHeader onClick={(e) => this.openTable("showHybrids")}>HYBRIDS dsfgafs</CardHeader>
+										<CardHeader onClick={(e) => this.openTable("showHybrids")}>HYBRIDS </CardHeader>
 										<Collapse isOpen={this.state.showHybrids}>
 											<Card>
 												<CardBody>
