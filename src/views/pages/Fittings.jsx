@@ -474,6 +474,7 @@ class Fittings extends React.Component {
 				<SimpleHeader parentName="Fittings" />
 				
 				<Container className="mt--6" fluid>
+			
 					<Row>
 						<div className="col">{this.renderTable()}</div>
 					</Row>

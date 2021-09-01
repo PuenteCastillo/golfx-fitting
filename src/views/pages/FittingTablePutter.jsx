@@ -22,11 +22,17 @@ class FittingTablePutter extends React.Component {
 				club_type: "",
 				shaft_type: "",
 				// flex: "",
+				Club_status:"",
 				marked: "Delete"
 			}
 		],
 		clubOption: [],
 		productOption: [],
+		statusOptions: [
+			{label: "Ready for Build", value: "Ready for Build"},
+			{label: "Ignore", value: "Ignore"},
+			{label: "Completed", value: "Completed"},
+			{label: "Picked Up", value: "Picked Up"}],
 		oem: [],
 		oemNames: [],
 		currentOem: "",
@@ -154,6 +160,7 @@ class FittingTablePutter extends React.Component {
 	// `   '`---'`---'    `  `'`---'`-'-'    `   ``---'`-'-'
 
 	newRow = () => {
+		this.props.simplifiedFunction('adding a new row');
 		let num = this.state.num;
 		console.log("test num", num);
 		num += 1;
@@ -182,6 +189,7 @@ class FittingTablePutter extends React.Component {
 			club_type: this.state.currentClub,
 			shaft_type: "",
 			// flex: "",
+			Club_status:"Ready for Build",
 			hideDetail: false,
 			marked: "Delete"
 		};
@@ -201,7 +209,8 @@ class FittingTablePutter extends React.Component {
 		let irons = this.state.irons;
 
 		console.log(irons.length);
-		if (irons.length > 1) {
+	
+		if (irons.length > 0) {
 			// find object in array and delete
 			for (var i = 0; i < irons.length; i++) {
 				var obj = irons[i];
@@ -209,10 +218,17 @@ class FittingTablePutter extends React.Component {
 					irons.splice(i, 1);
 				}
 			}
+			console.log('this is the irons',irons);
+		
+			console.log(irons.length );
+			if(irons.length === 0 ){
+				irons = [];		
+			}
 			//set new Irons
 			this.setState({ irons: irons });
 		} else {
 			console.log("no thanks ");
+			console.log('this is the irons',irons);
 			let emptyIrons = [
 				{
 					id: 1,
@@ -227,6 +243,7 @@ class FittingTablePutter extends React.Component {
 					club_type: "",
 					shaft_type: "",
 					// flex: "",
+					Club_status:"",
 					marked: "Delete"
 				}
 			];
@@ -245,7 +262,7 @@ class FittingTablePutter extends React.Component {
 
 		return (
 			<>
-				<div className="max-100w">
+				<div className={`max-100w ${this.state.irons.length ? "" : "hide"}`}>
 					<BootstrapTable
 						keyField="id"
 						data={this.state.irons}
@@ -310,7 +327,14 @@ class FittingTablePutter extends React.Component {
 							// 	dataField: "flex",
 							// 	text: "Flex"
 							// },
-
+							{
+								dataField: "Club_status",
+								text: "club status",
+								editor: {
+									type: Type.SELECT,
+									options: this.state.statusOptions
+								}
+							},
 							{
 								dataField: "marked",
 								text: "Delete",
@@ -333,10 +357,15 @@ class FittingTablePutter extends React.Component {
 						})}
 					/>
 
-					<Button block className="text-primary shadow-none " color="white" size="lg" type="button" onClick={this.newRow}>
-						<i className="fas fa-plus addRow"></i>
-					</Button>
+				
 				</div>
+					{/* <Button block className="text-primary shadow-none " color="white" size="lg" type="button" onClick={this.newRow}>
+						<i className="fas fa-plus addRow"></i>
+					</Button> */}
+					<Button block className=" shadow-none add-more-btn " color="white" size="lg" type="button" onClick={this.newRow}>
+						<i className="fas fa-plus"></i> Add Club
+						  
+					</Button>
 			</>
 		);
 	}

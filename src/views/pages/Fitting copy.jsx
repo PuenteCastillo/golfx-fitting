@@ -698,6 +698,7 @@ class FittingSheetNewView extends React.Component {
 					toggle={(e) => this.toggleModal("specToggle")}
 					setSpec={(e) => this.setSpec(e)}
 				/>
+	
 				<Seven_iron_Model
 					data={this.state.seven_iron_specs}
 					open={this.state.seven_iron_sepc_Toggle}

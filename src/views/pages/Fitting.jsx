@@ -184,9 +184,17 @@ class Fitting extends React.Component {
 		this.check_status();
 	};
 
+	simplifiedFunction = (value) => {
+		this.setState({
+			status: "Ready For Build",
+		
+		})
+		
+	  }
+
 	check_status = (data) => {
 		let exisitingClub = [];
-
+		
 		if(this.state.irons){
 			let Irons =this.state.irons;
 			exisitingClub = exisitingClub.concat(Irons);
@@ -214,21 +222,16 @@ class Fitting extends React.Component {
 var arrayLength = exisitingClub.length;
 var CompleteCount = 0;
 var PickedUpCount = 0;
+let ReadyBuildCount =0;
+
 for (var i = 0; i < arrayLength; i++) {
+
     console.log(exisitingClub[i].Club_status);
 	
-	if(exisitingClub[i].Club_status === 'Picked Up'){
-		PickedUpCount ++;
+	
 
-		if(PickedUpCount === arrayLength){ 
-			this.setState({
-				status: "Complete",
-			
-			})
-		}
-	}
 
-	if(exisitingClub[i].Club_status === 'Completed' || exisitingClub[i].Club_status === 'Ignore'){
+	if(exisitingClub[i].Club_status === 'Completed'|| exisitingClub[i].Club_status === 'Ignore' ){
 		CompleteCount ++;
 		if(CompleteCount  === arrayLength){ 
 			console.log('all are completed');
@@ -240,9 +243,37 @@ for (var i = 0; i < arrayLength; i++) {
 
 		}
 	}
+	if(exisitingClub[i].Club_status === 'Picked Up' || exisitingClub[i].Club_status === 'Ignore'){
+		PickedUpCount ++;
+
+		if(PickedUpCount === arrayLength){ 
+			this.setState({
+				status: "Complete",
+			
+			})
+		}
+	}
+	
+	if(exisitingClub[i].Club_status === 'Ready for Build' ){
+
+		console.log( 'it ready to build');
+		ReadyBuildCount ++;
+		
+	}
+
+	
     //Do something
 }
-		
+console.log('build count',ReadyBuildCount );
+		if(ReadyBuildCount > 0){
+			console.log('changing the state');
+			this.setState({
+				status: "Ready For Build",
+			
+			})
+
+			console.log(this.state.status);
+		}
 		// console.log('Irons',this.state.irons);
 		// console.log('hybrids',this.state.hybrids);
 		// console.log('Woods',this.state.woods);
@@ -288,7 +319,7 @@ for (var i = 0; i < arrayLength; i++) {
 	render_irons = () => {
 		if (this.isEmpty(this.state.irons)) {
 			if (this.state.skipGen) {
-				return <FittingTable2 clubSelect={clubSelect} irons={(e) => this.updateIrons(e)} startingData={this.state.irons} table="IRON" />;
+				return <FittingTable2 simplifiedFunction= {this.simplifiedFunction} clubSelect={clubSelect} irons={(e) => this.updateIrons(e)} startingData={this.state.irons} table="IRON"   />;
 			} else {
 				return (
 					<div className="m-5" onClick={(e) => this.toggleModal("iron_table_modal")}>
@@ -304,17 +335,17 @@ for (var i = 0; i < arrayLength; i++) {
 				);
 			}
 		} else {
-			return <FittingTable2 clubSelect={clubSelect} irons={(e) => this.updateIrons(e)} startingData={this.state.irons} />;
+			return <FittingTable2 simplifiedFunction= {this.simplifiedFunction} clubSelect={clubSelect} irons={(e) => this.updateIrons(e)} startingData={this.state.irons} />;
 		}
 	};
 
 	openTable = (state) => {
 		this.setState({
-			showIrons: false,
-			showHybrids: false,
-			showWoods: false,
-			showWedges: false,
-			showPutters: false,
+			showIrons: true,
+			showHybrids: true,
+			showWoods: true,
+			showWedges: true,
+			showPutters: true,
 		});
 
 		this.setState({
@@ -392,33 +423,52 @@ for (var i = 0; i < arrayLength; i++) {
 		if (!this.isEmpty(mystate.state.static_specs)) {
 			data.static_specs = mystate.state.static_specs;
 		}
+
+		// Set new data or else the data is empty
 		if (!this.isEmpty(iron_data)) {
 			data.irons = iron_data;
 			console.log("iron data", iron_data);
+		}else{
+			data.irons = [];
 		}
 		if (!this.isEmpty(hybrid_data)) {
+			
 			data.hybrids = hybrid_data;
+		}else{
+			data.hybrids = [];
 		}
 		if (!this.isEmpty(wood_data)) {
 			data.wood = wood_data;
+		}else{
+			data.wood = [];
 		}
+
 		if (!this.isEmpty(wedge_data)) {
+			console.log(' this is data for wedges')
 			data.wedge = wedge_data;
+		}else{
+			data.wedge = [];
 		}
+
 		if (!this.isEmpty(putter_data)) {
 			data.putter = putter_data;
+		}else{
+			data.putter=[];
 		}
+
 		if (!this.isEmpty(mystate.state.fitting_date)) {
 			data.fitting_date = mystate.state.fitting_date;
 		}
+
 		if (!this.isEmpty(mystate.state.status)) {
 			data.status = mystate.state.status;
 		}
+		
 		if (!this.isEmpty(color)) {
 			data.status_color = color;
 		}
 		console.log(wedge_data);
-		console.log(data);
+		console.log('full data', data);
 		axios({
 			method: "put",
 			url: "https://kbsgolfx-db.herokuapp.com/fittings/" + mystate.state.fitting_id,
@@ -430,9 +480,19 @@ for (var i = 0; i < arrayLength; i++) {
 			.then(function (response) {
 				// comp_state.setState({ showLoad: false })
 				window.location.reload(false);
+				// console.log('#################################');
+				// console.log('Butthole');
+			
+				// console.log('irons data', mystate.state.irons);
+				// console.log('hybrids data', mystate.state.hybrids);
+				// console.log('woods data', mystate.state.woods);
+				// console.log('wedges data', mystate.state.wedges);
+				// console.log('putter data', mystate.state.putter);
+				
+			
 			})
 			.catch(function (error) {
-				console.log(error.response);
+				console.log(error);
 				comp_state.setState({ showLoad: false });
 			});
 	};
@@ -452,6 +512,7 @@ for (var i = 0; i < arrayLength; i++) {
 			return (
 				<Container className="mt--6" fluid>
 					<Iron_table_Modal
+				simplifiedFunction= {this.simplifiedFunction}
 						skip={(e) => this.skip(e)}
 						data={this.state.irons}
 						open={this.state.iron_table_modal}
@@ -583,16 +644,19 @@ for (var i = 0; i < arrayLength; i++) {
 								<Col>
 									<Card>
 										<CardHeader onClick={(e) => this.openTable("showIrons")}>IRONS</CardHeader>
-										<Collapse isOpen={this.state.showIrons}>
+										{/* <Collapse isOpen={this.state.showIrons}> */}
+										<Collapse isOpen={true}>
 											<Card>
 												<CardBody>{this.render_irons()}</CardBody>
 											</Card>
 										</Collapse>
 										<CardHeader onClick={(e) => this.openTable("showHybrids")}>HYBRIDS</CardHeader>
-										<Collapse isOpen={this.state.showHybrids}>
+										{/* <Collapse isOpen={this.state.showHybrids}> */}
+										<Collapse isOpen={true}>
 											<Card>
 												<CardBody>
 													<FittingTable2
+													simplifiedFunction= {this.simplifiedFunction}
 														clubSelect={HybridSelect}
 														irons={(e) => this.updateHybrids(e)}
 														startingData={this.state.hybrids}
@@ -602,18 +666,21 @@ for (var i = 0; i < arrayLength; i++) {
 											</Card>
 										</Collapse>
 										<CardHeader onClick={(e) => this.openTable("showWoods")}>WOODS</CardHeader>
-										<Collapse isOpen={this.state.showWoods}>
+										{/* <Collapse isOpen={this.state.showWoods}> */}
+										<Collapse isOpen={true}>
 											<Card>
 												<CardBody>
-													<FittingTable2 clubSelect={WoodSelect} irons={(e) => this.updateWoods(e)} startingData={this.state.woods} table={"WOOD"} />
+													<FittingTable2 simplifiedFunction= {this.simplifiedFunction} clubSelect={WoodSelect} irons={(e) => this.updateWoods(e)} startingData={this.state.woods} table={"WOOD"} />
 												</CardBody>
 											</Card>
 										</Collapse>
 										<CardHeader onClick={(e) => this.openTable("showWedges")}>WEDGES</CardHeader>
-										<Collapse isOpen={this.state.showWedges}>
+										{/* <Collapse isOpen={this.state.showWedges}> */}
+										<Collapse isOpen={true}>
 											<Card>
 												<CardBody>
 													<FittingTable2
+													simplifiedFunction= {this.simplifiedFunction}
 														clubSelect={Wedgeselect}
 														irons={(e) => this.updateWedges(e)}
 														startingData={this.state.wedges}
@@ -623,10 +690,12 @@ for (var i = 0; i < arrayLength; i++) {
 											</Card>
 										</Collapse>
 										<CardHeader onClick={(e) => this.openTable("showPutters")}>PUTTER</CardHeader>
-										<Collapse isOpen={this.state.showPutters}>
+										{/* <Collapse isOpen={this.state.showPutters}> */}
+										<Collapse isOpen={true}>
 											<Card>
 												<CardBody>
 													<FittingTablePutter
+													simplifiedFunction= {this.simplifiedFunction}
 														clubSelect={PutterSelect}
 														irons={(e) => this.updatePutters(e)}
 														startingData={this.state.putter}
