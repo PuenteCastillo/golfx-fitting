@@ -229,16 +229,7 @@ for (var i = 0; i < arrayLength; i++) {
     console.log(exisitingClub[i].Club_status);
 	
 	
-	if(exisitingClub[i].Club_status === 'Picked Up' || exisitingClub[i].Club_status === 'Ignore'){
-		PickedUpCount ++;
 
-		if(PickedUpCount === arrayLength){ 
-			this.setState({
-				status: "Complete",
-			
-			})
-		}
-	}
 
 	if(exisitingClub[i].Club_status === 'Completed'|| exisitingClub[i].Club_status === 'Ignore' ){
 		CompleteCount ++;
@@ -252,7 +243,17 @@ for (var i = 0; i < arrayLength; i++) {
 
 		}
 	}
+	if(exisitingClub[i].Club_status === 'Picked Up' || exisitingClub[i].Club_status === 'Ignore'){
+		PickedUpCount ++;
 
+		if(PickedUpCount === arrayLength){ 
+			this.setState({
+				status: "Complete",
+			
+			})
+		}
+	}
+	
 	if(exisitingClub[i].Club_status === 'Ready for Build' ){
 
 		console.log( 'it ready to build');
