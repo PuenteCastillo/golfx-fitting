@@ -1,45 +1,46 @@
-import React from "react";
+import React from 'react';
 // react plugin that prints a given react component
-import { Button, CardFooter, CardHeader } from "reactstrap";
+import { Button, CardFooter, CardHeader } from 'reactstrap';
 
-import BootstrapTable from "react-bootstrap-table-next";
-import cellEditFactory, { Type } from "react-bootstrap-table2-editor";
-import axios from "axios";
+import BootstrapTable from 'react-bootstrap-table-next';
+import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
+import axios from 'axios';
 
 class FittingTable2 extends React.Component {
 	state = {
 		irons: [
 			{
 				id: 1,
-				club: "",
-				loft: "",
-				lie: "",
-				cpm: "",
-				sw: "",
-				length: "",
-				oem: "",
-				tipping: "",
-				club_type: "",
-				shaft_type: "",
-				flex: "",
-				Club_status:"",
-				marked: "Delete"
-			}
+				club: '',
+				loft: '',
+				lie: '',
+				cpm: '',
+				sw: '',
+				length: '',
+				oem: '',
+				tipping: '',
+				club_type: '',
+				shaft_type: '',
+				flex: '',
+				Club_status: '',
+				marked: 'Delete',
+			},
 		],
 		clubOption: [],
 		productOption: [],
 		statusOptions: [
-		{label: "Ready for Build", value: "Ready for Build"},
-		{label: "Ignore", value: "Ignore"},
-		{label: "Completed", value: "Completed"},
-		{label: "Picked Up", value: "Picked Up"}],
+			{ label: 'Ready for Build', value: 'Ready for Build' },
+			{ label: 'Ignore', value: 'Ignore' },
+			{ label: 'Completed', value: 'Completed' },
+			{ label: 'Picked Up', value: 'Picked Up' },
+		],
 		oem: [],
 		oemNames: [],
-		currentOem: "",
-		currentClub: "",
+		currentOem: '',
+		currentClub: '',
 		num: 1,
 		selected: [],
-		clubType: "Irons"
+		clubType: 'Irons',
 	};
 	// componentWillMount = () => {
 	// 	// console.log('props', this.props.table);
@@ -49,7 +50,7 @@ class FittingTable2 extends React.Component {
 	// 	// console.log('table type', this.state.clubType);
 	// }
 	componentDidMount = () => {
-		if(this.props.table){
+		if (this.props.table) {
 			this.setState({ clubType: this.props.table });
 		}
 		// console.log('props', this.props.table);
@@ -63,7 +64,7 @@ class FittingTable2 extends React.Component {
 		// console.log("props in fitting table", this.props)
 		if (this.props.startingData) {
 			for (let i = 0; i < this.props.startingData.length; i++) {
-				this.props.startingData[i].marked = "Delete";
+				this.props.startingData[i].marked = 'Delete';
 				this.props.startingData[i].id += 300;
 			}
 			this.setState({ irons: this.props.startingData });
@@ -76,9 +77,9 @@ class FittingTable2 extends React.Component {
 		// `---'`---'`---'    `---'`---'`---'`---'    `---^`   '`---'    `---'`---'` ' '    `--' `---^`---'`---^
 		axios
 			.all([
-				axios.get("https://kbsgolfx-db.herokuapp.com/brands"),
-				axios.get("https://kbsgolfx-db.herokuapp.com/clubs"),
-				axios.get("https://kbsgolfx-db.herokuapp.com/products")
+				axios.get('https://kbsgolfx-db.herokuapp.com/brands'),
+				axios.get('https://kbsgolfx-db.herokuapp.com/clubs'),
+				axios.get('https://kbsgolfx-db.herokuapp.com/products'),
 			])
 			.then(
 				axios.spread((oemRes, clubRes, productRes) => {
@@ -89,63 +90,69 @@ class FittingTable2 extends React.Component {
 						const data = a;
 						let items = [];
 						let singleItem = {};
-						let dataName = "";
+						let dataName = '';
 						for (let i = 0; i < data.length; i++) {
 							// console.log('data', data[i]);
-							dataName = data[i].brand_name || data[i].club_name || data[i].product_name;
+							dataName =
+								data[i].brand_name || data[i].club_name || data[i].product_name;
 							// if(shaftType =="WEDGE"){
 							// 	console.log('these are irons');
 							// }
 							// console.log("shaft type in here", shaftType)
 
-							
-							if(data[i].category){
+							if (data[i].category) {
 								var shaftCategory = data[i].category;
-								singleItem = { value: dataName, label: dataName, category: shaftCategory };
-							} else{
+								singleItem = {
+									value: dataName,
+									label: dataName,
+									category: shaftCategory,
+								};
+							} else {
 								singleItem = { value: dataName, label: dataName };
 							}
 							// console.log(singleItem)
 							items.push(singleItem);
 						}
 						items.sort((a, b) => a.label.localeCompare(b.label));
-						if (isOem === "oem") {
+						if (isOem === 'oem') {
 							myState.setState({ oemNames: items, oem: data });
-						} else if (isOem === "club") {
+						} else if (isOem === 'club') {
 							myState.setState({ clubOption: items });
-						} else if (isOem === "product") {
-						
+						} else if (isOem === 'product') {
 							myState.setState({ productOption: items });
-
 						}
 					}
 					// setTimeout(console.log('items', this.state.productOption), 500)
-					sortDate(oemRes.data, "oem");
-					sortDate(clubRes.data, "club");
-					sortDate(productRes.data, "product");
+					sortDate(oemRes.data, 'oem');
+					sortDate(clubRes.data, 'club');
+					sortDate(productRes.data, 'product');
 					// console.log('product options', this.state.productOption)
 					// console.log("state of club", this.state.clubType)
-					if(this.state.clubType==="Irons"){
+					if (this.state.clubType === 'Irons') {
 						var shaftData = this.state.productOption;
-						var newData = shaftData.filter(club => club.category==="IRON");
-						this.setState({productOption: newData});
-					}else if(this.state.clubType==="WEDGE"){
+						var newData = shaftData.filter((club) => club.category === 'IRON');
+						this.setState({ productOption: newData });
+					} else if (this.state.clubType === 'WEDGE') {
 						var shaftData = this.state.productOption;
-						var newData = shaftData.filter(club => club.category==="WEDGE");
-						this.setState({productOption: newData});
+						var newData = shaftData.filter((club) => club.category === 'WEDGE');
+						this.setState({ productOption: newData });
 						console.log('how data is brokendown', newData);
-					}else if(this.state.clubType==="HYBRID"){
+					} else if (this.state.clubType === 'HYBRID') {
 						var shaftData = this.state.productOption;
-						var newData = shaftData.filter(club => club.category==="HYBRID");
-						this.setState({productOption: newData});
-					}else if(this.state.clubType==="WOOD"){
+						var newData = shaftData.filter(
+							(club) => club.category === 'HYBRID'
+						);
+						this.setState({ productOption: newData });
+					} else if (this.state.clubType === 'WOOD') {
 						var shaftData = this.state.productOption;
-						var newData = shaftData.filter(club => club.category==="WOOD");
-						this.setState({productOption: newData});
-					}else if(this.state.clubType==="PUTTER"){
+						var newData = shaftData.filter((club) => club.category === 'WOOD');
+						this.setState({ productOption: newData });
+					} else if (this.state.clubType === 'PUTTER') {
 						var shaftData = this.state.productOption;
-						var newData = shaftData.filter(club => club.category==="PUTTER");
-						this.setState({productOption: newData});
+						var newData = shaftData.filter(
+							(club) => club.category === 'PUTTER'
+						);
+						this.setState({ productOption: newData });
 					}
 					// console.log("dadafs", this.state.productOption);
 					// function getProductCat() {
@@ -184,10 +191,38 @@ class FittingTable2 extends React.Component {
 		//if Oem is choosen
 		if (row.oem) {
 			this.setState({ currentOem: row.oem });
-			let clubList = this.state.oem.find((x) => x.brand_name === row.oem).clubs;
+
+			console.log(' Actual OEM : ', row.oem);
+			console.log(' list of oem : ', this.state.oem);
+			console.log(this.state.oem.find((x) => x.brand_name === row.oem));
+
+			console.log(this.state.oem.clubs);
+
+			let all_clubs = [];
+
+			for (let i = 0; i < this.state.oem.length; i++) {
+				// console.log(this.state.oem[i].clubs);
+				all_clubs = all_clubs.concat(this.state.oem[i].clubs);
+			}
+			console.log(all_clubs);
+
+			// let clubList = this.state.oem.find((x) => x.brand_name === row.oem).clubs;
+
+			let clubList = [];
+
+			console.log(
+				this.state.oem.find((x) => x.brand_name === row.oem) === undefined
+			);
+			if (this.state.oem.find((x) => x.brand_name === row.oem)) {
+				clubList = this.state.oem.find((x) => x.brand_name === row.oem).clubs;
+			} else {
+				clubList = all_clubs;
+			}
+
+			console.log(clubList);
 			let items = [];
 			let singleItem = {};
-			let singleclubList = "";
+			let singleclubList = '';
 			let singleId = 0;
 
 			for (let i = 0; i < clubList.length; i++) {
@@ -215,15 +250,14 @@ class FittingTable2 extends React.Component {
 	// `   '`---'`---'    `  `'`---'`-'-'    `   ``---'`-'-'
 
 	newRow = () => {
-
 		this.props.simplifiedFunction('adding a new row');
 		let num = this.state.num;
-		console.log("test num", num);
+		console.log('test num', num);
 		num += 1;
 		let oldTable = this.state.irons;
 		let oldnum = num - 2;
-		let newclub_type = "";
-		let newOem = "";
+		let newclub_type = '';
+		let newOem = '';
 
 		// if (oldnum < 0) {
 		//   newclub_type = "";
@@ -234,20 +268,20 @@ class FittingTable2 extends React.Component {
 		// new row information
 		let newRow = {
 			id: num,
-			club: "",
-			loft: "",
-			lie: "",
-			cpm: "",
-			sw: "",
-			length: "",
-			tipping: "",
+			club: '',
+			loft: '',
+			lie: '',
+			cpm: '',
+			sw: '',
+			length: '',
+			tipping: '',
 			oem: this.state.currentOem,
 			club_type: this.state.currentClub,
-			shaft_type: "",
-			flex: "",
-			Club_status:"Ready for Build",
+			shaft_type: '',
+			flex: '',
+			Club_status: 'Ready for Build',
 			hideDetail: false,
-			marked: "Delete"
+			marked: 'Delete',
 		};
 		// add new row to array
 		oldTable.push(newRow);
@@ -267,7 +301,7 @@ class FittingTable2 extends React.Component {
 		console.log(irons.length);
 		if (irons.length > 0) {
 			// find object in array and delete
-			console.log( 'length is greather then one');
+			console.log('length is greather then one');
 			for (var i = 0; i < irons.length; i++) {
 				var obj = irons[i];
 				if (irons[i].id === row.id) {
@@ -275,35 +309,35 @@ class FittingTable2 extends React.Component {
 				}
 			}
 			//set new Irons
-			console.log(irons.length );
-			if(irons.length === 0 ){
-				irons = [];		
+			console.log(irons.length);
+			if (irons.length === 0) {
+				irons = [];
 			}
 			this.setState({ irons: irons });
 
-			console.log( this.state.irons );
+			console.log(this.state.irons);
 		} else {
-			console.log("no thanks ");
+			console.log('no thanks ');
 			let emptyIrons = [
 				{
 					id: 1,
-					club: "",
-					loft: "",
-					lie: "",
-					cpm: "",
-					sw: "",
-					length: "",
-					tipping: "",
-					oem: "",
-					club_type: "",
-					shaft_type: "",
-					flex: "",
-					Club_status:"",
-					marked: "Delete"
-				}
+					club: '',
+					loft: '',
+					lie: '',
+					cpm: '',
+					sw: '',
+					length: '',
+					tipping: '',
+					oem: '',
+					club_type: '',
+					shaft_type: '',
+					flex: '',
+					Club_status: '',
+					marked: 'Delete',
+				},
 			];
 
-			this.setState({ irons: emptyIrons, currentClub: "", currentOem: "" });
+			this.setState({ irons: emptyIrons, currentClub: '', currentOem: '' });
 		}
 	};
 
@@ -312,131 +346,143 @@ class FittingTable2 extends React.Component {
 			// mode: 'radio',  // multi select
 			clickToSelect: true,
 
-			bgColor: function(row, isSelect) {
+			bgColor: function (row, isSelect) {
 				// row
 				return 'red';
-			//   if (isSelect) {
-			// 	const { id } = row;
-			// 	if (id < 2) return 'blue';
-			// 	else if (id < 4) return 'red';
-			// 	else return 'yellow';
-			//   }
-			//   return null;
-			}
-		  };
+				//   if (isSelect) {
+				// 	const { id } = row;
+				// 	if (id < 2) return 'blue';
+				// 	else if (id < 4) return 'red';
+				// 	else return 'yellow';
+				//   }
+				//   return null;
+			},
+		};
 
 		const options = {
-			expandRowBgColor: 'rgb(242, 255, 163)'
-		  };
+			expandRowBgColor: 'rgb(242, 255, 163)',
+		};
 		return (
 			<>
-				
-				<div className={`max-100w ${this.state.irons.length ? "" : "hide"}`}>
-
-				
+				<div className={`max-100w ${this.state.irons.length ? '' : 'hide'}`}>
 					<BootstrapTable
-				
 						keyField="id"
 						data={this.state.irons}
 						columns={[
 							{
-								dataField: "club",
-								text: "club",
+								dataField: 'club',
+								text: 'club',
 								editor: {
 									type: Type.SELECT,
-									options: this.props.clubSelect
-								}
+									options: this.props.clubSelect,
+								},
 							},
 							{
-								dataField: "loft",
-								text: "LOFT*"
+								dataField: 'loft',
+								text: 'LOFT*',
 							},
 							{
-								dataField: "lie",
-								text: "lie*"
+								dataField: 'lie',
+								text: 'lie*',
 							},
 							{
-								dataField: "cpm",
-								text: "FM#"
+								dataField: 'cpm',
+								text: 'FM#',
 							},
 							{
-								dataField: "sw",
-								text: "S.W"
+								dataField: 'sw',
+								text: 'S.W',
 							},
 							{
-								dataField: "length",
-								text: "Length"
+								dataField: 'length',
+								text: 'Length',
 							},
 							{
-								dataField: "tipping",
-								text: "Tipping"
+								dataField: 'tipping',
+								text: 'Tipping',
 							},
 							{
-								dataField: "oem",
-								text: "oem",
+								dataField: 'oem',
+								text: 'oem',
 								editor: {
 									type: Type.SELECT,
-									options: this.state.oemNames
-								}
+									options: this.state.oemNames,
+								},
 							},
 							{
-								dataField: "club_type",
-								text: "Club Type",
+								dataField: 'club_type',
+								text: 'Club Type',
 								editor: {
 									type: Type.SELECT,
-									options: this.state.clubOption
-								}
+									options: this.state.clubOption,
+								},
 							},
 							{
-								dataField: "shaft_type",
-								text: "Shaft Type",
+								dataField: 'shaft_type',
+								text: 'Shaft Type',
 								editor: {
 									type: Type.SELECT,
-									options: this.state.productOption
-								}
+									options: this.state.productOption,
+								},
 							},
 							{
-								dataField: "flex",
-								text: "Flex"
+								dataField: 'flex',
+								text: 'Flex',
 							},
 							{
-								dataField: "Club_status",
-								text: "club status",
+								dataField: 'Club_status',
+								text: 'club status',
 								editor: {
 									type: Type.SELECT,
-									options: this.state.statusOptions
-								}
+									options: this.state.statusOptions,
+								},
 							},
 
 							{
-								dataField: "marked",
-								text: "Delete",
-								editorRenderer: (editorProps, value, row, column, rowIndex, columnIndex) => (
-									<Button color="primary" {...editorProps} value={value} onClick={(e) => this.DelteRow(e, row)}>
-										{" "}
-										Delete{" "}
+								dataField: 'marked',
+								text: 'Delete',
+								editorRenderer: (
+									editorProps,
+									value,
+									row,
+									column,
+									rowIndex,
+									columnIndex
+								) => (
+									<Button
+										color="primary"
+										{...editorProps}
+										value={value}
+										onClick={(e) => this.DelteRow(e, row)}
+									>
+										{' '}
+										Delete{' '}
 									</Button>
-								)
-							}
+								),
+							},
 						]}
 						onTableChange={this.handleTableChange}
-						
 						cellEdit={cellEditFactory({
-							mode: "click",
+							mode: 'click',
 							blurToSave: true,
 							afterSaveCell: (oldValue, newValue, row, column) => {
 								this.updateRow(oldValue, newValue, row, column);
-							}
+							},
 						})}
 						// options= { options }
 						// selectRow={selectRow}
 					/>
-			
 				</div>
-				<Button block className=" shadow-none add-more-btn " color="white" size="lg" type="button" onClick={this.newRow}>
-						<i className="fas fa-plus"></i> Add Club
-						  
-					</Button>
+				<Button
+					block
+					className=" shadow-none add-more-btn "
+					color="white"
+					size="lg"
+					type="button"
+					onClick={this.newRow}
+				>
+					<i className="fas fa-plus"></i> Add Club
+				</Button>
 			</>
 		);
 	}
