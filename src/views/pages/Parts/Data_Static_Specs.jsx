@@ -100,7 +100,6 @@ class Data_Static_Specs extends React.Component {
                   <div className="d-flex align-items-center">
                     <div>
                       <div className="icon icon-xs icon-shape bg-gradient-primary text-white shadow rounded-circle">
-                        {/* <i class="fab fa-accessible-icon"></i> */}
                         <i class="fa-solid fa-trophy"></i>
                       </div>
                     </div>
