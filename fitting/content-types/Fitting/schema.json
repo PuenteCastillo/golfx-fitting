@@ -1,0 +1,74 @@
+{
+  "connection": "default",
+  "collectionName": "fittings",
+  "info": {
+    "singularName": "fitting",
+    "pluralName": "fittings",
+    "displayName": "Fitting",
+    "name": "fitting",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": ["created_at", "updated_at"],
+    "comment": ""
+  },
+  "attributes": {
+    "customer_info": {
+      "group": "customer_info",
+      "type": "group"
+    },
+    "seven_iron_specs": {
+      "group": "seven_iron_specs",
+      "type": "group"
+    },
+    "static_specs": {
+      "group": "static_specs",
+      "type": "group"
+    },
+    "fitting_notes": {
+      "type": "text"
+    },
+    "building_notes": {
+      "type": "text"
+    },
+    "irons": {
+      "group": "irons",
+      "repeatable": true,
+      "type": "group"
+    },
+    "hybrids": {
+      "group": "irons",
+      "repeatable": true,
+      "type": "group"
+    },
+    "wood": {
+      "group": "irons",
+      "repeatable": true,
+      "type": "group"
+    },
+    "status": {
+      "type": "string"
+    },
+    "fitting_date": {
+      "type": "date"
+    },
+    "status_color": {
+      "type": "string"
+    },
+    "customer": {
+      "model": "customer",
+      "via": "fittings"
+    },
+    "wedge": {
+      "group": "irons",
+      "type": "group",
+      "repeatable": true
+    },
+    "putter": {
+      "group": "irons",
+      "type": "group",
+      "repeatable": true
+    }
+  }
+}

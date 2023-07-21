@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/fittings",
+      "handler": "Fitting.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/fittings/count",
+      "handler": "Fitting.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/fittings/:id",
+      "handler": "Fitting.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/fittings",
+      "handler": "Fitting.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/fittings/:id",
+      "handler": "Fitting.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/fittings/:id",
+      "handler": "Fitting.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

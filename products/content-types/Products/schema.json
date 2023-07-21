@@ -1,0 +1,24 @@
+{
+  "connection": "default",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Products",
+    "name": "products",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": ["created_at", "updated_at"],
+    "comment": ""
+  },
+  "attributes": {
+    "product_name": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    }
+  }
+}

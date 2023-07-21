@@ -1,0 +1,26 @@
+{
+  "connection": "default",
+  "collectionName": "brands",
+  "info": {
+    "singularName": "brand",
+    "pluralName": "brands",
+    "displayName": "brands",
+    "name": "brands",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "brand_name": {
+      "required": true,
+      "type": "string"
+    },
+    "clubs": {
+      "collection": "club",
+      "via": "brand"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "connection": "default",
+  "collectionName": "customers",
+  "info": {
+    "singularName": "customer",
+    "pluralName": "customers",
+    "displayName": "Customer",
+    "name": "customer",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": ["created_at", "updated_at"],
+    "comment": ""
+  },
+  "attributes": {
+    "name_first": {
+      "type": "string",
+      "required": true
+    },
+    "name_last": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "biginteger"
+    },
+    "email": {
+      "unique": true,
+      "required": true,
+      "type": "email"
+    },
+    "address": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "zipcode": {
+      "type": "biginteger"
+    },
+    "fitting_notes": {
+      "type": "text"
+    },
+    "updates": {
+      "group": "updates",
+      "repeatable": true,
+      "type": "group"
+    },
+    "fittings": {
+      "collection": "fitting",
+      "via": "customer"
+    }
+  }
+}

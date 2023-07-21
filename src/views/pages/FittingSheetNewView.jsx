@@ -35,7 +35,7 @@ import {
   NavLink,
   TabContent,
   TabPane,
-  CardFooter
+  CardFooter,
 } from "reactstrap";
 import classnames from "classnames";
 // core components
@@ -54,8 +54,15 @@ import Data_Static_Specs from "./Parts/Data_Static_Specs";
 import Data_Seven_Iron_Spec from "./Parts/Data_Seven_Iron_Spec";
 import Iron_table_Modal from "./Parts/Iron_table_Modal";
 
-import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
-import FittingPDF from './FittingPDF';
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  PDFDownloadLink,
+} from "@react-pdf/renderer";
+import FittingPDF from "./FittingPDF";
 
 const clubSelect = [
   { value: "2", label: "2" },
@@ -69,7 +76,7 @@ const clubSelect = [
   { value: "PW", label: "PW" },
   { value: "GW", label: "GW" },
   { value: "sw", label: "sw" },
-  { value: "LW", label: "LW" }
+  { value: "LW", label: "LW" },
 ];
 const HybridSelect = [
   { value: "2", label: "2" },
@@ -77,14 +84,14 @@ const HybridSelect = [
   { value: "4", label: "4" },
   { value: "5", label: "5" },
   { value: "6", label: "6" },
-  { value: "7", label: "7" }
+  { value: "7", label: "7" },
 ];
 const WoodSelect = [
   { value: "Drive", label: "Drive" },
   { value: "3W", label: "3W" },
   { value: "4W", label: "4W" },
   { value: "5W", label: "5W" },
-  { value: "7W", label: "7W" }
+  { value: "7W", label: "7W" },
 ];
 
 class FittingSheetNewView extends React.Component {
@@ -116,14 +123,14 @@ class FittingSheetNewView extends React.Component {
       height: "",
       wrist_to_floor: "",
       normal_shot_shape: "",
-      normal_trajectory: ""
+      normal_trajectory: "",
     },
     seven_iron_specs: {
       length: "",
       lie: "",
       loft: "",
       cpm: "",
-      gripsize: ""
+      gripsize: "",
     },
     customer_info: {
       name:
@@ -135,7 +142,7 @@ class FittingSheetNewView extends React.Component {
       address: JSON.parse(localStorage.getItem("customer_info")).address,
       city: JSON.parse(localStorage.getItem("customer_info")).city,
       state: JSON.parse(localStorage.getItem("customer_info")).state,
-      zipcode: JSON.parse(localStorage.getItem("customer_info")).zipcode
+      zipcode: JSON.parse(localStorage.getItem("customer_info")).zipcode,
     },
     activeTab: "1",
     sevenlength: "",
@@ -156,8 +163,8 @@ class FittingSheetNewView extends React.Component {
         length: "",
         oem: "",
         club_type: "",
-        shaft_type: ""
-      }
+        shaft_type: "",
+      },
     ],
     hybrids: [
       {
@@ -171,8 +178,8 @@ class FittingSheetNewView extends React.Component {
         oem: "",
         club_type: "",
         shaft_type: "",
-        marked: "Delete"
-      }
+        marked: "Delete",
+      },
     ],
     woods: [
       {
@@ -186,13 +193,13 @@ class FittingSheetNewView extends React.Component {
         oem: "",
         club_type: "",
         shaft_type: "",
-        marked: "Delete"
-      }
-    ]
+        marked: "Delete",
+      },
+    ],
   };
-  toggleModal = state => {
+  toggleModal = (state) => {
     this.setState({
-      [state]: !this.state[state]
+      [state]: !this.state[state],
     });
   };
 
@@ -203,18 +210,20 @@ class FittingSheetNewView extends React.Component {
     const { id } = this.props.match.params;
 
     axios({
-      method: 'GET',
-      url: `https://kbsgolfx-db.herokuapp.com/fittings/` + id,
+      method: "GET",
+      url:
+        `https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/fittings/` +
+        id,
       headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('golfx_token'))}`,
+        Authorization: `Bearer ${JSON.parse(
+          localStorage.getItem("golfx_token")
+        )}`,
       },
-
-    }).then(res => {
+    }).then((res) => {
       let fitting = res.data;
       console.log(fitting);
 
       this.setState({
-
         customer_info: fitting.customer_info,
         fitting_notes: fitting.fitting_notes,
         building_notes: fitting.building_notes,
@@ -233,10 +242,8 @@ class FittingSheetNewView extends React.Component {
         iron_data_recieved: true,
         render_fitting_notes: true,
         render_building_notes: true,
-
       });
-
-    })
+    });
   };
 
   componentWillUnmount = () => {
@@ -246,7 +253,7 @@ class FittingSheetNewView extends React.Component {
 
   ////// update Specs ////
 
-  setSpec = newSpec => {
+  setSpec = (newSpec) => {
     this.setState({ static_specs: newSpec, static_specs_recieved: true });
   };
 
@@ -255,7 +262,7 @@ class FittingSheetNewView extends React.Component {
       return (
         <Data_Static_Specs
           data={this.state.static_specs}
-          toggle={e => this.toggleModal("specToggle")}
+          toggle={(e) => this.toggleModal("specToggle")}
         />
       );
     } else {
@@ -265,13 +272,13 @@ class FittingSheetNewView extends React.Component {
           btnText="Add specs"
           icon="fad fa-ruler display-2"
           style="icon icon-shape bg-gradient-red text-dark rounded-circle shadow"
-          toggle={e => this.toggleModal("specToggle")}
+          toggle={(e) => this.toggleModal("specToggle")}
         />
       );
     }
   };
 
-  setSeven_iron = data => {
+  setSeven_iron = (data) => {
     this.setState({ seven_iron_specs: data, Seven_iron_sepc_recieved: true });
   };
 
@@ -280,7 +287,7 @@ class FittingSheetNewView extends React.Component {
       return (
         <Data_Seven_Iron_Spec
           data={this.state.seven_iron_specs}
-          toggle={e => this.toggleModal("seven_iron_sepc_Toggle")}
+          toggle={(e) => this.toggleModal("seven_iron_sepc_Toggle")}
         />
       );
     } else {
@@ -290,21 +297,21 @@ class FittingSheetNewView extends React.Component {
           btnText="Add 7 iron"
           icon="fad fa-golf-club display-2"
           style="icon icon-shape bg-gradient-red text-dark rounded-circle shadow"
-          toggle={e => this.toggleModal("seven_iron_sepc_Toggle")}
+          toggle={(e) => this.toggleModal("seven_iron_sepc_Toggle")}
         />
       );
     }
   };
 
-  openTable = state => {
+  openTable = (state) => {
     this.setState({
       showIrons: false,
       showHybrids: false,
-      showWoods: false
+      showWoods: false,
     });
 
     this.setState({
-      [state]: true
+      [state]: true,
     });
   };
 
@@ -318,25 +325,25 @@ class FittingSheetNewView extends React.Component {
   creta_a_fitting = () => {
     axios({
       method: "post",
-      url: "https://kbsgolfx-db.herokuapp.com/fittings",
+      url: "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/fittings",
       headers: {
         Authorization: `Bearer ${JSON.parse(
           localStorage.getItem("golfx_token")
-        )}`
+        )}`,
       },
       data: {
         fitting_notes: this.state.fitting_notes,
         building_notes: this.state.building_notes,
         customer: {
-          id: JSON.parse(localStorage.getItem("customer_info")).id
+          id: JSON.parse(localStorage.getItem("customer_info")).id,
         },
         customer_info: this.state.customer_info,
         seven_iron_specs: this.state.seven_iron_specs,
         static_specs: this.state.static_specs,
         irons: this.state.irons,
         hybrids: this.state.hybrids,
-        wood: this.state.woods
-      }
+        wood: this.state.woods,
+      },
     })
       .then(function (response) {
         console.log(response);
@@ -346,11 +353,11 @@ class FittingSheetNewView extends React.Component {
       });
   };
 
-  toggle = e => {
+  toggle = (e) => {
     this.setState({ activeTab: e });
   };
 
-  expand = e => {
+  expand = (e) => {
     e.preventDefault();
     console.log("hello world");
 
@@ -368,15 +375,15 @@ class FittingSheetNewView extends React.Component {
   // ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗    ██║██╗██║  ██║██╗╚███╔███╔╝
   //  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═╝╚═╝╚═╝  ╚═╝╚═╝ ╚══╝╚══╝
 
-  updateIrons = data => {
+  updateIrons = (data) => {
     this.setState({ irons: data });
     console.log(this.state.irons);
   };
-  updateHybrids = data => {
+  updateHybrids = (data) => {
     this.setState({ hybrids: data });
     console.log(this.state.hybrids);
   };
-  updateWoods = data => {
+  updateWoods = (data) => {
     this.setState({ woods: data });
     console.log(this.state.woods);
   };
@@ -457,11 +464,11 @@ class FittingSheetNewView extends React.Component {
     }
   };
 
-  set_iron_data = data => {
+  set_iron_data = (data) => {
     this.setState({ irons: data, iron_data_recieved: true });
   };
 
-  skip = e => {
+  skip = (e) => {
     console.log("skipped");
     this.setState({ iron_data_recieved: true });
     this.toggleModal("iron_table_modal");
@@ -472,7 +479,7 @@ class FittingSheetNewView extends React.Component {
       return (
         <div
           className="m-5"
-          onClick={e => this.toggleModal("iron_table_modal")}
+          onClick={(e) => this.toggleModal("iron_table_modal")}
         >
           <h4 className="text-center"> Add Irons </h4>
           <h1 className="text-center">
@@ -488,7 +495,7 @@ class FittingSheetNewView extends React.Component {
       return (
         <FittingTable2
           clubSelect={clubSelect}
-          irons={e => this.updateIrons(e)}
+          irons={(e) => this.updateIrons(e)}
           startingData={this.state.irons}
         />
       );
@@ -501,35 +508,40 @@ class FittingSheetNewView extends React.Component {
         <Row>
           <Col>
             <Card>
-              <CardHeader onClick={e => this.openTable("showIrons")}>
+              <CardHeader onClick={(e) => this.openTable("showIrons")}>
                 IRONS
-          </CardHeader>
+              </CardHeader>
               <Collapse isOpen={this.state.showIrons}>
                 <Card>
                   <CardBody>{this.render_irons()}</CardBody>
                 </Card>
               </Collapse>
-              <CardHeader onClick={e => this.openTable("showHybrids")}>
+              <CardHeader onClick={(e) => this.openTable("showHybrids")}>
                 HYBRIDS
-          </CardHeader>
+              </CardHeader>
               <Collapse isOpen={this.state.showHybrids}>
                 <Card>
                   <CardBody>
-
-                    <FittingTable2 clubSelect={HybridSelect} irons={e => this.updateHybrids(e)} startingData={this.state.hybrids} />
-
+                    <FittingTable2
+                      clubSelect={HybridSelect}
+                      irons={(e) => this.updateHybrids(e)}
+                      startingData={this.state.hybrids}
+                    />
                   </CardBody>
                 </Card>
               </Collapse>
 
-              <CardHeader onClick={e => this.openTable("showWoods")}>
+              <CardHeader onClick={(e) => this.openTable("showWoods")}>
                 WOODS
-          </CardHeader>
+              </CardHeader>
               <Collapse isOpen={this.state.showWoods}>
                 <Card>
                   <CardBody>
-                    <FittingTable2 clubSelect={WoodSelect} irons={e => this.updateWoods(e)} startingData={this.state.woods} />
-
+                    <FittingTable2
+                      clubSelect={WoodSelect}
+                      irons={(e) => this.updateWoods(e)}
+                      startingData={this.state.woods}
+                    />
                   </CardBody>
                 </Card>
               </Collapse>
@@ -538,9 +550,8 @@ class FittingSheetNewView extends React.Component {
         </Row>
       );
     }
-  }
+  };
   render_fitting_note = () => {
-
     if (this.state.render_fitting_notes) {
       return (
         <Col md="12">
@@ -549,9 +560,9 @@ class FittingSheetNewView extends React.Component {
               <CardHeader className="bg-transparent">
                 <h4 className="text-uppercase ls-1  py-3 mb-0">
                   Fitting Notes
-        </h4>
+                </h4>
               </CardHeader>
-              <CardBody >
+              <CardBody>
                 <FormGroup>
                   {/* <label className="form-control-label">
                 Fitting Notes{" "}
@@ -562,17 +573,16 @@ class FittingSheetNewView extends React.Component {
                     rows="4"
                     type="textarea"
                     value={this.state.fitting_notes}
-                    onChange={(e) => { this.setState({ fitting_notes: e.target.value }); }}
+                    onChange={(e) => {
+                      this.setState({ fitting_notes: e.target.value });
+                    }}
                   />
                 </FormGroup>
               </CardBody>
-
             </Card>
           </Card>
-
         </Col>
-
-      )
+      );
     } else {
       return (
         <AppCard
@@ -580,73 +590,78 @@ class FittingSheetNewView extends React.Component {
           btnText="Add Fitting Notes"
           icon="fad fa-sticky-note display-2"
           style="icon icon-shape bg-gradient-red text-dark rounded-circle shadow"
-          toggle={e => this.toggleModal("render_fitting_notes")}
+          toggle={(e) => this.toggleModal("render_fitting_notes")}
         />
       );
     }
-
-  }
-
+  };
 
   render_building_note = () => {
-
     if (this.state.render_building_notes) {
       return (
         <Col md="12">
-
           <Card className="card-pricing border-0 text-center mb-4">
             <CardHeader className="bg-transparent">
-              <h4 className="text-uppercase ls-1  py-3 mb-0">
-                Building Notes
-        </h4>
+              <h4 className="text-uppercase ls-1  py-3 mb-0">Building Notes</h4>
             </CardHeader>
-            <CardBody >
+            <CardBody>
               <FormGroup>
-
                 <Input
                   // defaultValue={this.state.profile.fitting_notes}
                   // placeholder={this.state.profile.fitting_notes}
                   rows="4"
                   type="textarea"
                   value={this.state.building_notes}
-                  onChange={(e) => { this.setState({ building_notes: e.target.value }); }}
+                  onChange={(e) => {
+                    this.setState({ building_notes: e.target.value });
+                  }}
                 />
               </FormGroup>
             </CardBody>
-
           </Card>
-
-
         </Col>
-
-      )
+      );
     } else {
       return (
-
         <AppCard
           title="Building Notes"
           btnText="Add Fitting Notes"
           icon="fad fa-sticky-note display-2"
           style="icon icon-shape bg-gradient-red text-dark rounded-circle shadow"
-          toggle={e => this.toggleModal("render_building_notes")}
+          toggle={(e) => this.toggleModal("render_building_notes")}
         />
-
       );
     }
-
-  }
+  };
 
   render_print = () => {
     if (this.state.data_retreaved) {
       return (
-        <PDFDownloadLink className="btn btn-neutral btn-lg" color="default" size="lg" document={<FittingPDF fitting_notes={this.state.fitting_notes} building_notes={this.state.building_notes} seven_iron_specs={this.state.seven_iron_specs} static_specs={this.state.static_specs} customer_info={this.state.customer_info} irons={this.state.irons} hybrids={this.state.hybrids} woods={this.state.woods} />} fileName="KBSFitting.pdf">
-
-          {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Print')}
-
+        <PDFDownloadLink
+          className="btn btn-neutral btn-lg"
+          color="default"
+          size="lg"
+          document={
+            <FittingPDF
+              fitting_notes={this.state.fitting_notes}
+              building_notes={this.state.building_notes}
+              seven_iron_specs={this.state.seven_iron_specs}
+              static_specs={this.state.static_specs}
+              customer_info={this.state.customer_info}
+              irons={this.state.irons}
+              hybrids={this.state.hybrids}
+              woods={this.state.woods}
+            />
+          }
+          fileName="KBSFitting.pdf"
+        >
+          {({ blob, url, loading, error }) =>
+            loading ? "Loading document..." : "Print"
+          }
         </PDFDownloadLink>
-      )
+      );
     }
-  }
+  };
   // ██████╗ ███████╗███╗   ██╗██████╗ ███████╗██████╗
   // ██╔══██╗██╔════╝████╗  ██║██╔══██╗██╔════╝██╔══██╗
   // ██████╔╝█████╗  ██╔██╗ ██║██║  ██║█████╗  ██████╔╝
@@ -658,9 +673,7 @@ class FittingSheetNewView extends React.Component {
     return (
       <>
         {/* {this.state.alert} */}
-        <LoadingScreen show={this.state.showLoad}>
-        </LoadingScreen>
-
+        <LoadingScreen show={this.state.showLoad}></LoadingScreen>
 
         <SimpleHeader
           name={
@@ -669,32 +682,36 @@ class FittingSheetNewView extends React.Component {
             JSON.parse(localStorage.getItem("customer_info")).name_last
           }
           parentName="Fitting Sheet"
-
         >
-          <Button className="btn-neutral" color="default" size="lg" onClick={e => this.creta_a_fitting()}>
+          <Button
+            className="btn-neutral"
+            color="default"
+            size="lg"
+            onClick={(e) => this.creta_a_fitting()}
+          >
             Save
-                  </Button>
+          </Button>
           {this.render_print()}
         </SimpleHeader>
 
         <SpecModel
           data={this.state.static_specs}
           open={this.state.specToggle}
-          toggle={e => this.toggleModal("specToggle")}
-          setSpec={e => this.setSpec(e)}
+          toggle={(e) => this.toggleModal("specToggle")}
+          setSpec={(e) => this.setSpec(e)}
         />
         <Seven_iron_Model
           data={this.state.seven_iron_specs}
           open={this.state.seven_iron_sepc_Toggle}
-          toggle={e => this.toggleModal("seven_iron_sepc_Toggle")}
-          setSeven_iron={e => this.setSeven_iron(e)}
+          toggle={(e) => this.toggleModal("seven_iron_sepc_Toggle")}
+          setSeven_iron={(e) => this.setSeven_iron(e)}
         />
         <Iron_table_Modal
-          skip={e => this.skip(e)}
+          skip={(e) => this.skip(e)}
           data={this.state.irons}
           open={this.state.iron_table_modal}
-          toggle={e => this.toggleModal("iron_table_modal")}
-          set_iron_data={e => this.set_iron_data(e)}
+          toggle={(e) => this.toggleModal("iron_table_modal")}
+          set_iron_data={(e) => this.set_iron_data(e)}
         />
 
         <Container className="mt--6" fluid>
@@ -713,12 +730,9 @@ class FittingSheetNewView extends React.Component {
               <CustomerNotes />
 
               <Row>
-
                 {this.render_fitting_note()}
 
                 {this.render_building_note()}
-
-
               </Row>
             </Col>
             <Col className="order-xl-1" xl="8">
@@ -731,11 +745,7 @@ class FittingSheetNewView extends React.Component {
             </Col>
           </Row>
         </Container>
-        <div>
-
-
-
-        </div>
+        <div></div>
       </>
     );
   }

@@ -3,24 +3,23 @@
   "version": "1.1.0",
   "private": true,
   "engines": {
-    "node": "v12.14.1",
-    "npm": "6.13.4"
+    "node": ">=14.19.1",
+    "npm": ">=9.8.0"
   },
   "dependencies": {
     "@fullcalendar/core": "4.4.0",
     "@fullcalendar/daygrid": "4.4.0",
     "@fullcalendar/interaction": "4.4.0",
     "@react-pdf/renderer": "^1.6.7",
-    "axios": "^0.21.1",
+    "axios": "1.4.0",
     "chart.js": "2.9.3",
     "classnames": "2.2.6",
-    "compile-sass": "^1.1.1",
+    "compile-sass": "^2.0.0",
     "dropzone": "5.7.0",
     "list.js": "1.5.0",
     "moment": "2.24.0",
-    "node-sass": "4.13.1",
     "nouislider": "14.1.1",
-    "npm": "^6.14.8",
+    "npm": "^6.14.18",
     "prop-types": "15.7.2",
     "react": "16.12.0",
     "react-bootstrap-sweetalert": "5.1.9",
@@ -45,7 +44,8 @@
     "react-tagsinput": "3.19.0",
     "react-to-print": "2.5.1",
     "reactstrap": "8.4.1",
-    "run": "^1.4.0"
+    "run": "^1.4.0",
+    "sass": "^1.63.6"
   },
   "scripts": {
     "start": "react-scripts --max_old_space_size=4096  start",
@@ -73,7 +73,6 @@
     "eslint-plugin-flowtype": "3.13.0",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
-    "node-sass": "4.13.1",
     "typescript": "3.7.5"
   }
 }
