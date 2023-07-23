@@ -91,20 +91,20 @@ class FittingTable2 extends React.Component {
       .then(
         axios.spread((oemRes, clubRes, productRes) => {
           // do something with both responses
-          console.log("product red", productRes.data.data);
-          console.log("oemRes", oemRes.data.data);
-          console.log("clubRes", clubRes.data.data);
+          // console.log("product red", productRes.data.data);
+          // console.log("oemRes", oemRes.data.data);
+          // console.log("clubRes", clubRes.data.data);
           // console.log('asdfasdf', this.state.clubType)
 
           productRes = organizeData(productRes.data.data);
           oemRes = organizeData(oemRes.data.data);
           clubRes = organizeData(clubRes.data.data);
-          console.log("productRes", productRes);
+          // console.log("productRes", productRes);
           // for each oemREs.clubs.data organize data
           for (let i = 0; i < oemRes.length; i++) {
             oemRes[i].clubs = organizeData(oemRes[i].clubs.data);
           }
-          console.log("oemRes", oemRes);
+          // console.log("oemRes", oemRes);
 
           function organizeData(data) {
             // for each item in data combine .id and .attributes
@@ -124,7 +124,7 @@ class FittingTable2 extends React.Component {
             let singleItem = {};
             let dataName = "";
             for (let i = 0; i < data.length; i++) {
-              console.log("data", data[i]);
+              // console.log("data", data[i]);
               dataName =
                 data[i].brand_name || data[i].club_name || data[i].Product_name;
               // if(shaftType =="WEDGE"){
@@ -142,10 +142,10 @@ class FittingTable2 extends React.Component {
               } else {
                 singleItem = { value: dataName, label: dataName };
               }
-              console.log(singleItem);
+              // console.log(singleItem);
               items.push(singleItem);
             }
-            console.log("items", items);
+            // console.log("items", items);
 
             items.sort((a, b) => a.label.localeCompare(b.label));
             if (isOem === "oem") {

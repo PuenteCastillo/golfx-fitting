@@ -109,7 +109,7 @@ class FittingTablePutter extends React.Component {
             let singleItem = {};
             let dataName = "";
             for (let i = 0; i < data.length; i++) {
-              console.log("data", data[i]);
+              // console.log("data", data[i]);
               dataName =
                 data[i].brand_name || data[i].club_name || data[i].Product_name;
               // if(shaftType =="WEDGE"){
@@ -127,10 +127,10 @@ class FittingTablePutter extends React.Component {
               } else {
                 singleItem = { value: dataName, label: dataName };
               }
-              console.log(singleItem);
+              // console.log(singleItem);
               items.push(singleItem);
             }
-            console.log("items", items);
+            // console.log("items", items);
 
             items.sort((a, b) => a.label.localeCompare(b.label));
             if (isOem === "oem") {

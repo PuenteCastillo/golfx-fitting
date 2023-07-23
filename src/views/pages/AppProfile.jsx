@@ -160,23 +160,26 @@ class AppProfile extends React.Component {
     this.setState({ showLoad: true });
     let thisisit = this;
 
+    let data_to_send = {
+      fitting_date: this.state.new_fitting_date,
+      customers: {
+        id: this.state.profile.id,
+      },
+      status: "Ready For Fitting",
+      status_color: "success",
+    };
+    console.log("data to send", data_to_send);
+
     axios({
       method: "post",
-      url: "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/fittings?_limit=-1&populate=*",
+      url: "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/fittings",
       // headers: {
       //   Authorization: `Bearer ${JSON.parse(
       //     localStorage.getItem("golfx_token")
       //   )}`,
       // },
       data: {
-        data: {
-          fitting_date: thisisit.state.new_fitting_date,
-          customer: {
-            id: this.state.profile.id,
-          },
-          status: "Ready For Fitting",
-          status_color: "success",
-        },
+        data: data_to_send,
       },
     })
       .then(function (response) {

@@ -58,7 +58,7 @@ class CalendarView extends React.Component {
     // console.log('state.events', this.state.events)
     axios({
       method: "GET",
-      url: "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/fittings?_sort=published_at:desc&_limit=5&populate=*",
+      url: "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/fittings?populate=*",
     })
       .then(function (response) {
         console.log("response", response);
@@ -69,6 +69,12 @@ class CalendarView extends React.Component {
             id: response.data.data[i].id,
           };
         }
+        console.log("response.data.data", response.data.data);
+        // Use .createdAt to sort fittings by date and keep the 10 most recent fittings
+        response.data.data.sort(function (a, b) {
+          return new Date(b.fitting_date) - new Date(a.fitting_date);
+        });
+        response.data.data = response.data.data.slice(0, 5);
         console.log("response.data.data", response.data.data);
 
         myState.setState({ fittings: response.data.data });
@@ -90,9 +96,9 @@ class CalendarView extends React.Component {
       console.log("real datadata", data[i]);
 
       let full_name =
-        data[i].customer.data.attributes.name_first +
+        data[i].customers.data[0].attributes.name_first +
         " " +
-        data[i].customer.data.attributes.name_last;
+        data[i].customers.data[0].attributes.name_last;
       console.log("full name", full_name);
       let item = {
         id: data[i].id,
@@ -106,7 +112,7 @@ class CalendarView extends React.Component {
       console.log(item.start);
       event.push(item);
     }
-    // console.log("events", event);
+    console.log("events", event);
 
     this.setState({ events: event });
     // console.log('state after items pushed', this.state.events)
@@ -115,7 +121,7 @@ class CalendarView extends React.Component {
   };
 
   createCalendar = () => {
-    // console.log('is this being called correctly?', this.state.events);
+    console.log("is this being called correctly?", this.state.events);
     calendar = new Calendar(this.refs.calendar, {
       plugins: [interaction, dayGridPlugin],
       defaultView: "dayGridMonth",

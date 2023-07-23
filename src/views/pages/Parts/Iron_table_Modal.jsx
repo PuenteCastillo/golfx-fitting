@@ -54,45 +54,78 @@ class Iron_table_Modal extends React.Component {
     axios
       .all([
         axios.get(
-          "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/brands"
+          "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/brands?_limit=-1&populate=*"
         ),
         axios.get(
-          "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/clubs"
+          "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/clubs?_limit=-1&populate=*"
         ),
         axios.get(
-          "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/products"
+          "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/products?_limit=-1&populate=*"
         ),
       ])
       .then(
         axios.spread((oemRes, clubRes, productRes) => {
           // do something with both responses
+          console.log("product red", productRes.data.data);
+          console.log("oemRes", oemRes.data.data);
+          console.log("clubRes", clubRes.data.data);
+          // console.log('asdfasdf', this.state.clubType)
+
+          productRes = organizeData(productRes.data.data);
+          oemRes = organizeData(oemRes.data.data);
+          clubRes = organizeData(clubRes.data.data);
+          console.log("productRes", productRes);
+          // for each oemREs.clubs.data organize data
+          for (let i = 0; i < oemRes.length; i++) {
+            oemRes[i].clubs = organizeData(oemRes[i].clubs.data);
+          }
+          console.log("oemRes", oemRes);
+
+          function organizeData(data) {
+            // for each item in data combine .id and .attributes
+            let newData = [];
+            let singleItem = {};
+            let singleId = 0;
+            for (let i = 0; i < data.length; i++) {
+              singleId = data[i].id;
+              singleItem = { ...data[i].attributes, id: singleId };
+              newData.push(singleItem);
+            }
+            return newData;
+          }
 
           function sortDate(a, isOem) {
             const data = a;
             let items = [];
             let singleItem = {};
             let dataName = "";
-            // console.log('items', items);
             for (let i = 0; i < data.length; i++) {
+              // console.log("data", data[i]);
               dataName =
-                data[i].brand_name || data[i].club_name || data[i].product_name;
+                data[i].brand_name || data[i].club_name || data[i].Product_name;
               singleItem = { id: dataName, text: dataName };
+              // console.log(singleItem);
               items.push(singleItem);
             }
+
+            console.log("items", items);
+
+            // sort alphabetically
             items.sort((a, b) => a.text.localeCompare(b.text));
+
             if (isOem === "oem") {
               myState.setState({ oemNames: items, oem: data });
             } else if (isOem === "club") {
               myState.setState({ clubOption: items });
-            } else {
+            } else if (isOem === "product") {
               myState.setState({ productOption: items });
             }
           }
 
           // console.log(this.state.oem);
-          sortDate(oemRes.data, "oem");
-          sortDate(clubRes.data, "club");
-          sortDate(productRes.data, "product");
+          sortDate(oemRes, "oem");
+          sortDate(clubRes, "club");
+          sortDate(productRes, "product");
         })
       );
   }
@@ -296,7 +329,15 @@ class Iron_table_Modal extends React.Component {
           Club_status: "Ready for Build",
         },
       ];
-
+      // set items in data to strings if not empty
+      for (let i = 0; i < data.length; i++) {
+        for (let key in data[i]) {
+          if (data[i][key]) {
+            data[i][key] = data[i][key].toString();
+          }
+        }
+      }
+      console.log("data", data);
       myState.props.set_iron_data(data);
       myState.props.toggle();
     }
@@ -319,6 +360,12 @@ class Iron_table_Modal extends React.Component {
       flex: document.getElementById("input-flex-table").value,
       Club_status: "Ready for Build",
     };
+
+    // converst each item in data into a string
+    // for (let key in data) {
+    //   data[key] = data[key].toString();
+    // }
+    // console.log("data to strings", data);
 
     if (data.loft || data.lie || data.cpm) {
       console.log("7 iron was made", data);

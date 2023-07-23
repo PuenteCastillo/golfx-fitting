@@ -129,8 +129,8 @@ class Fitting extends React.Component {
       let currentFitting = res.data.data.attributes;
       currentFitting.id = res.data.data.id;
       console.log("getting fitting", currentFitting);
-      let currentCustomer = currentFitting.customer.data.attributes;
-      currentCustomer.id = currentFitting.customer.data.id;
+      let currentCustomer = currentFitting.customers.data[0].attributes;
+      currentCustomer.id = currentFitting.customers.data[0].id;
 
       this.setState({
         static_specs: currentFitting.Static_specs,
@@ -148,6 +148,7 @@ class Fitting extends React.Component {
         fitting_date: currentFitting.fitting_date,
         status: currentFitting.status,
         fitting_id: currentFitting.id,
+        id: currentFitting.id,
       });
     });
   };
@@ -158,10 +159,11 @@ class Fitting extends React.Component {
   };
 
   Set_Seven_Iron = (data) => {
+    console.log("setting seven iron specs", data);
     // add a unique id to each item in data
-    for (let i = 0; i < data.length; i++) {
-      data[i].id = i;
-    }
+    // for (let i = 0; i < data.length; i++) {
+    //   data[i].id = i;
+    // }
     console.log("setting seven iron specs", data);
     this.setState({ seven_iron_specs: data, didStateChange: true });
   };
@@ -479,9 +481,9 @@ class Fitting extends React.Component {
     }
 
     if (!this.isEmpty(putter_data)) {
-      data.putter = putter_data;
+      data.Putter = putter_data;
     } else {
-      data.putter = [];
+      data.Putter = [];
     }
 
     if (!this.isEmpty(mystate.state.fitting_date)) {
@@ -518,7 +520,7 @@ class Fitting extends React.Component {
         // comp_state.setState({ showLoad: false })
         console.log(response);
 
-        // window.location.reload(false);
+        window.location.reload(false);
         // console.log('#################################');
         // console.log('Butthole');
         // console.log('irons data', mystate.state.irons);
