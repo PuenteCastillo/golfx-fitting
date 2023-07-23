@@ -587,7 +587,7 @@ class AppProfile extends React.Component {
                 </Col>
               </Row>
               <Row>
-                <Col>
+                {/* <Col>
                   <Card className="bg-gradient-default shadow">
                     <CardHeader className="bg-transparent">
                       <h3 className="mb-0 text-white">Activity</h3>
@@ -602,7 +602,7 @@ class AppProfile extends React.Component {
                       </div>
                     </CardBody>
                   </Card>
-                </Col>
+                </Col> */}
               </Row>
             </Col>
             <Col className="order-xl-1" xl="8">

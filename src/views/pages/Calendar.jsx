@@ -74,7 +74,7 @@ class CalendarView extends React.Component {
         response.data.data.sort(function (a, b) {
           return new Date(b.fitting_date) - new Date(a.fitting_date);
         });
-        response.data.data = response.data.data.slice(0, 5);
+        response.data.data = response.data.data.slice(0, 100);
         console.log("response.data.data", response.data.data);
 
         myState.setState({ fittings: response.data.data });
@@ -291,7 +291,7 @@ class CalendarView extends React.Component {
                     className="fullcalendar-btn-prev btn-neutral"
                     color="default"
                     onClick={() => {
-                      calendar.next();
+                      calendar.prev();
                       this.changeView("dayGridMonth");
                     }}
                     size="sm"
@@ -302,7 +302,7 @@ class CalendarView extends React.Component {
                     className="fullcalendar-btn-next btn-neutral"
                     color="default"
                     onClick={() => {
-                      calendar.prev();
+                      calendar.next();
                       this.changeView("dayGridMonth");
                     }}
                     size="sm"
