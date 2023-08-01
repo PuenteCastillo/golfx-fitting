@@ -345,6 +345,11 @@ class Products extends React.Component {
     this.setState({ showLoad: true });
     let thisisit = this;
     if (document.getElementById("input-oem").value) {
+      let data = {
+        brand_name: document.getElementById("input-oem").value.toUpperCase(),
+      };
+      console.log("Pushing Data: ", data);
+
       axios({
         method: "post",
         url: "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/brands",
@@ -369,25 +374,31 @@ class Products extends React.Component {
   newClub = (e) => {
     e.preventDefault();
     console.log(this.state.brand);
-    console.log(this.state.club);
+    console.log(document.getElementById("input-club").value);
     let thisisit = this;
     this.setState({ showLoad: true });
 
+    // get brand ID as a number
+    let brandId = parseInt(this.state.brand);
+
+    let mydata = {
+      club_name: document.getElementById("input-club").value,
+      brand: {
+        id: brandId,
+      },
+    };
+
+    console.log("Pushing Data: ", mydata);
     if (document.getElementById("input-club").value) {
       axios({
         method: "post",
         url: "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/clubs",
         data: {
-          data: {
-            club_name: document.getElementById("input-club").value,
-            brand: {
-              id: this.state.brand,
-            },
-          },
+          data: mydata,
         },
       })
         .then(function (response) {
-          // this.setState({ btnDisable : false})
+          // this.setState({ btnDisable: false });
           console.log(response);
           window.location.reload(false);
         })
@@ -425,7 +436,7 @@ class Products extends React.Component {
         })
           .then(function (response) {
             console.log(response);
-            // window.location.reload(false);
+
             window.location.reload(false);
           })
           .catch(function (error) {
