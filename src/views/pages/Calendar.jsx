@@ -74,7 +74,7 @@ class CalendarView extends React.Component {
         response.data.data.sort(function (a, b) {
           return new Date(b.fitting_date) - new Date(a.fitting_date);
         });
-        response.data.data = response.data.data.slice(0, 50);
+        response.data.data = response.data.data.slice(0, 100);
         console.log("response.data.data", response.data.data);
 
         myState.setState({ fittings: response.data.data });
@@ -95,14 +95,15 @@ class CalendarView extends React.Component {
     for (let i = 0; i < data.length; i++) {
       console.log("real datadata", data[i]);
 
+      // if (data[i].customers.data[0]) {
       let full_name =
         data[i].customers.data[0].attributes.name_first +
         " " +
         data[i].customers.data[0].attributes.name_last;
-      console.log("full name", full_name);
+      console.log("full name", data[i].id);
 
       let item = {
-        id: data[i].id,
+        id: data[i].id || 1,
         title: full_name || "N/A",
         start: data[i].fitting_date,
         allDay: false,
@@ -110,8 +111,9 @@ class CalendarView extends React.Component {
         description: data[i].fitting_notes || "N/A",
       };
       // console.log('item', item)
-      console.log(item.start);
+      // console.log(item.start);
       event.push(item);
+      // }
     }
     console.log("events", event);
 
