@@ -374,7 +374,7 @@ class Products extends React.Component {
   newClub = (e) => {
     e.preventDefault();
     console.log(this.state.brand);
-    console.log(document.getElementById("input-club").value);
+    // console.log(document.getElementById("input-club").value);
     let thisisit = this;
     this.setState({ showLoad: true });
 
@@ -388,8 +388,11 @@ class Products extends React.Component {
       },
     };
 
-    console.log("Pushing Data: ", mydata);
-    if (document.getElementById("input-club").value) {
+    // console.log("Pushing Data: ", mydata);
+
+    if (document.getElementById("input-club").value && brandId) {
+      console.log("club: ", document.getElementById("input-club").value);
+      console.log("brandID: ", brandId);
       axios({
         method: "post",
         url: "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/clubs",
@@ -405,6 +408,13 @@ class Products extends React.Component {
         .catch(function (error) {
           console.log(error.response);
         });
+    } else {
+      // remove load
+      this.setState({ showLoad: false });
+      console.log(" missing data");
+      // find '.Alert' and remove class 'hide'
+      let alert = document.querySelector(".Alert");
+      alert.classList.remove("hide");
     }
   };
 
@@ -822,6 +832,9 @@ class Products extends React.Component {
             // onChange={e => this.handleChange()}
             type="text"
           />
+          <div className="Alert hide mt-3 text-warning">
+            Please select a OEM AND type in a club name
+          </div>
         </div>
         <div className="modal-footer">
           <Button
