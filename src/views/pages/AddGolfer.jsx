@@ -277,7 +277,7 @@ class AddGolfer extends React.Component {
                 .then(function (response) {
                   console.log("fittingResult", response);
                   let fitting_id = profile_id;
-                  // window.location.href = "/admin/profil/" + profile_id;
+                  window.location.href = "/admin/profil/" + profile_id;
                 })
                 .catch(function (error) {
                   console.log(error.response);
