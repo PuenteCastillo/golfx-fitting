@@ -151,6 +151,11 @@ class AddGolfer extends React.Component {
       loginErro = true;
     }
 
+    // fitting_date checker
+    if (this.state.fitting_date === "" || this.state.fitting_date === null) {
+      this.setState({ fitting_date: moment().format() });
+    }
+
     if (loginErro === true) {
       this.setState({ btnDisable: false });
       return;
@@ -248,26 +253,31 @@ class AddGolfer extends React.Component {
 
               let profile_id = response.data.data.id;
               console.log("profile_id", response);
+
+              // data
+              const data_to_send = {
+                fitting_date: thisisit.state.fitting_date,
+                customers: {
+                  id: profile_id,
+                },
+                status: "Ready For Fitting",
+                status_color: "success",
+              };
+
+              console.log("fitting data : ", data_to_send);
               // / make fitting
 
               axios({
                 method: "post",
                 url: "https://golfx-fitting-db-ddbaf77fdd8d.herokuapp.com/api/fittings",
                 data: {
-                  data: {
-                    fitting_date: thisisit.state.fitting_date,
-                    customer: {
-                      id: profile_id,
-                    },
-                    status: "Ready For Fitting",
-                    status_color: "success",
-                  },
+                  data: data_to_send,
                 },
               })
                 .then(function (response) {
                   console.log("fittingResult", response);
                   let fitting_id = profile_id;
-                  window.location.href = "/admin/profil/" + profile_id;
+                  // window.location.href = "/admin/profil/" + profile_id;
                 })
                 .catch(function (error) {
                   console.log(error.response);
@@ -621,7 +631,8 @@ class AddGolfer extends React.Component {
                               Fitting Date
                             </label>
                             <ReactDatetime
-                              // defaultValue={moment(this.state.fitting_date).format("dddd, MMMM Do YYYY, h:mm a")}
+                              // default to today
+                              defaultValue={moment().format("YYYY-DD-MM")}
                               dateFormat="YYYY-DD-MM"
                               onChange={(e) => this.get_date(e)}
                             />
